@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Optional</title>
+    <style>
+        .inputEntry{
+            width: 370px;
+            height: 25px;
+            margin-top: 10px;
+        }
+        #addressEntry{
+            width: 370px;
+            height: 130px;
+            margin-top: 10px;
+        }
+        #labelDiv{
+            margin-top: 10px;
+            width: 100px;
+            margin-right:40px
+        }
+    </style>
+    </head>
+<body>
+  <div style="background-color: rgb(202, 193, 193);width: 550px;padding: 2%;">
+    <table>
+      <tr><td><div id="labelDiv">First Name</div></td>
+      <td><div id="inputDiv">
+      <input class="inputEntry" id="fname" type="text" placeholder="Enter your first name"> </div></td></tr>
+      <tr><td><div id="labelDiv">Last Name</div></td>
+      <td><div id="inputDiv"><input class="inputEntry" id="lname" type="text" placeholder="Enter your last name"></div></td></tr>
+      <tr><td><div id="labelDiv">Email</div></td>
+      <td><div id="inputDiv"><input class="inputEntry" id="email" type="text" placeholder="it should contain @"></div></td></tr>
+      <tr><td><div id="labelDiv">Mobile</div></td>
+      <td><div id="inputDiv"><input class="inputEntry" id="mobile" type="text" placeholder="Only 10 digits are allowed"></div></td></tr>
+      <tr><td><div id="labelDiv">Gender</div></td>
+      <td><div style="margin-top:10px"><input id="gender" type="radio" name="gender" value="Male">Male<input id="gender" value="Female" type="radio" name="gender">Female</div></td></tr>
+      <tr><td><div id="labelDiv">Date of Birth</div></td>
+      <td><div id="inputDiv"><input id="dob" class="inputEntry" type="date" max="2021-12-31"  placeholder="mm/dd/yyyy"></div></td></tr>
+      <tr><td><div style="margin-top:-60px;">Address</div></td>
+      <td><div id="inputDiv"><input id="addressEntry" type="text"></div></td></tr>
+      <tr><td><div id="labelDiv">City</div></td>
+      <td><div id="inputDiv"><input class="inputEntry" id="city" type="text"></div></td></tr>
+      <tr><td><div id="labelDiv">Area PIN</div></td>
+      <td><div id="inputDiv"><input class="inputEntry" id="areaPin" type="text"></div></td></tr>
+      <tr><td><div id="labelDiv">State</div></td>
+      <td><div id="inputDiv"><input id="state" class="inputEntry" type="text"></div></td></tr>
+      <tr><td><div id="labelDiv">Qualification</div></td>
+      <td><div id="inputDiv">
+      <select id="qualification">
+        <option disabled>Qualification</option>
+        <option value="10th">10th</option>
+        <option value="12th">12th</option>
+        <option value="Graduate">B.Tech</option>
+        <option value="Post_Graduate">M.Tech</option>
+      </select></div></td></tr>
+      <tr><td><div id="labelDiv">Specialization</div></td>
+      <td><div><input type="checkbox" value="Computer Science" id="cs">Computer Science <br>
+        <input type="checkbox" value="Information Technology" id="it">Information Technology <br>
+        <input type="checkbox" value="Computer Architecture" id="ca">Computer Architecture <br>
+        <input type="checkbox" value="Tele Communication" id="tc">Tele Communication <br>
+      </div></td></tr>
+      <tr><td><div id="labelDiv">Password</div></td>
+      <td><div id="inputDiv"><input id="password" class="inputEntry" type="text"></div></td></tr>
+      <tr><td><Button onclick="registered()" style="background-color: green; color: white;width: 100px;height: 30px;border-radius: 8px;margin-top:40px">Register</Button></td></tr>
+    </table>
+    <br><br>
+    <table id="displayAll">
+    </table>
+
+    <script>
+        var t='';
+        function registered()
+        {
+            var fname = document.getElementById("fname").value;
+            var lname = document.getElementById("lname").value;
+            var email = document.getElementById("email").value;
+            var mobile = document.getElementById("mobile").value;
+            var l = mobile.length;
+            var gender = document.getElementById("gender").value;
+            var dob = document.getElementById("dob").value;
+            var address = document.getElementById("addressEntry").value;
+            var city = document.getElementById("city").value;
+            var areaPin = document.getElementById("areaPin").value;
+            var state = document.getElementById("state").value;
+            var qualification = document.getElementById("qualification");
+            var specialization1 = document.getElementById("cs");
+            var specialization2 = document.getElementById("it");
+            var specialization3 = document.getElementById("ca");
+            var specialization4 = document.getElementById("tc");
+            var password = document.getElementById("password").value;
+            var selectedQualification = qualification.options[qualification.selectedIndex].text;
+            if (fname !='' && lname !='' && email != '' && mobile !='' && dob !='' && address !='' && city!='' && areaPin!='' && state!='' && password!=''){
+           
+            t ='<tr><td>Name :</td><td>'+fname +' '+lname+'</td></tr><br>';
+            t +='<tr><td>Email :</td><td>'+email +'</td></tr><br>';
+            t +='<tr><td>Mobile :</td><td>'+mobile +'</td></tr><br>';
+            t +='<tr><td>Gender :</td><td>'+gender +'</td></tr><br>';
+            t +='<tr><td>Date of Birth :</td><td>'+dob +'</td></tr><br>';
+            t +='<tr><td>Address :</td><td>'+address +'</td></tr><br>';
+            t +='<tr><td>City :</td><td>'+city +'</td></tr><br>';
+            t +='<tr><td>Area Pin :</td><td>'+areaPin +'</td></tr><br>';
+            t +='<tr><td>State :</td><td>'+state +'</td></tr><br>';
+            t +='<tr><td>Qualification :</td><td>'+selectedQualification +'</td></tr><br>';
+            t +='<tr><td>Specialization :</td>';
+            if(specialization1.checked){
+                t +='<td>'+specialization1.value +'</td></tr><br>';
+            }
+            if(specialization2.checked){
+                t +='<td></td><td>'+specialization2.value +'</td></tr><br>';
+            }
+            if(specialization3.checked){
+                t +='<td></td><td>'+specialization3.value +'</td></tr><br>';
+            }
+            if(specialization4.checked){
+                t +='<td></td><td>'+specialization4.value +'</td></tr><br>';
+            }
+            t +='<tr><td>Password :</td><td>'+password +'</td></tr><br>';
+
+            document.getElementById("displayAll").innerHTML = t;
+            }
+            else{
+                alert("Field is empty");
+            }
+        }
+
+
+
+
+
+
+    </script>
+  </div>
+</body>
+</html>
