@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body{
+	font-family: Arial;
+	font-size: 80%;
+}
+
+#wrapper{
+	width: 80%;
+	margin: 20px auto 0;
+}
+
+#add_product_form label{
+	display: block;
+	margin-top: 10px;
+}
+
+#add_product_form label span{
+	width: 150px;
+	display: inline-block;
+}
+
+#add_product_form .submit{
+	margin-top: 40px;
+}
+
+#add_product_form .submit input[type="button"]{
+	border-radius: 5px;
+	border: 1px solid #eeeeee;
+	padding: 10px;
+}
+
+#notification > div{
+	padding: 10px;
+	font-weight: bold;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	position: relative;
+}
+
+#notification #close{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	text-decoration: none;
+}
+
+#notification .success{
+	border: 1px solid green;
+	background: #7ED47E;
+}
+
+#notification .error{
+	border: 1px solid red;
+	background: #FF5733;
+}
+
+#product_list .delete{
+	margin-left: 10px;
+}
+
+#product_list table{
+	width: 400px;
+}
+
+#product_list table th{
+	text-align: left;
+}
+    </style>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="add_product_form">
+			<label for="product_sku">
+				<span>Product SKU</span> 
+				<input type="text" name="product_sku" id="product_sku">
+				<span id="errorSku" style="color: red;"></span>
+			</label>
+			<label for="product_name">
+				<span>Product Name</span> 
+				<input type="text" name="product_name" id="product_name">
+				<span id="errorName" style="color: red;"></span>
+			</label>
+			<label for="product_price">
+				<span>Product Price</span> 
+				<input type="text" name="product_price" id="product_price">
+				<span id="errorPrice" style="color: red;"></span>
+			</label>
+			<label for="product_quantity">
+				<span>Product Quantity</span> 
+				<input type="text" name="product_quantity" id="product_quantity">
+				<span id="errorQuan" style="color: red;"></span>
+			</label>
+			<p class="submit">
+				<input onclick="addDetails()" type="button" name="add_product" id="add_product" value="Add Product">
+			</p>
+		</div>
+		<div id="notification">
+			<!-- <div class="success">Product Added Successfully.<a href="#" class="close">X</a></div> -->
+			<!-- <div class="error">There is some problem.<a href="#" class="close">X</a></div> -->
+		</div>
+		<div >
+			<table id="product_list">
+				<tr>
+					<th>SKU</th>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Action</th>
+				</tr>
+				<tr>
+					<td>101</td>
+					<td>Product 101</td>
+					<td>$150.00</td>
+					<td>50</td>
+					<td><a href="#" class="edit">Edit &nbsp</a><a href="#" id="delete">Delete</a></td>
+				</tr>
+				<tr>
+					<td>102</td>
+					<td>Product 102</td>
+					<td>$100.00</td>
+					<td>20</td>
+					<td><a href="#" class="edit">Edit &nbsp</a><a href="#" id="delete">Delete</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<script>
+
+$(document).ready(function(){
+
+$("#add_product").click(function(){
+
+    var sku = $("#product_sku").val();
+    var name = $("#product_name").val();
+    var price = $("#product_price").val();
+    var quantity = $("#product_quantity").val();
+    var a = '<tr>';
+	var valid=0;
+	if(sku == '')
+	{
+        er = '<div class="error">There is a problem.<a href="#" id="close">X</a></div>';
+        $('#notification').html(er);
+		$("#product_sku").css("border","5px solid red");
+		$("#errorSku").html("SKU field is empty");
+		valid =1;
+    }
+	if(name == ''){
+        er = '<div class="error">There is a problem.<a href="#" id="close">X</a></div>';
+        $('#notification').html(er);
+		$("#errorName").html("Name field is empty");
+		$("#product_name").css("border","5px solid red");
+		valid =1;
+      }
+
+	if(price == ''){
+        er = '<div class="error">There is a problem..<a href="#" id="close">X</a></div>';
+        $('#notification').html(er);
+		$("#errorPrice").html("Price field is empty.");
+		$("#product_price").css("border","5px solid red");
+		valid =1;
+      }
+	if(quantity==''){
+        er = '<div class="error">There is a problem.<a href="#" id="close" >X</a></div>';
+        $('#notification').html(er);
+		$("#errorQuan").html("Quantity field is empty.");
+		$("#product_quantity").css("border","5px solid red");
+		valid =1;
+      }
+    else if(isNaN(sku))
+	{
+        er = '<div class="error">There is a problem.<a href="#" id="close">X</a></div>';
+        $('#notification').html(er);
+		$("#errorSku").html("SKU shoud be integer");
+		$("#product_sku").css("border","5px solid red");
+		valid =1;
+    }
+	
+    
+	else if(!isNaN(name))
+	{
+        er = '<div class="error">There is a problem.<a href="#" id="close">X</a></div>';
+        $('#notification').html(er);
+		$("#errorName").html("Name shoud not be number.");
+		$("#product_name").css("border","5px solid red");
+		valid =1;
+      }
+	 
+	
+    else if(isNaN(price)){
+        er = '<div class="error">There is a problem.<a href="#" id="close">X</a></div>';
+        $('#notification').html(er);
+		$("#errorPrice").html("Price shoud be number.");
+		$("#product_price").css("border","5px solid red");
+		valid =1;
+      }
+	
+	
+    else if(isNaN(quantity)){
+        er = '<div class="error">There is a problem.<a href="#" id="close">X</a></div>';
+        $('#notification').html(er);
+		$("#errorQuan").html("Quantity shoud be integer");
+		$("#product_quantity").css("border","5px solid red");
+		valid =1;
+      }
+    else if(quantity !='' && valid==0){
+		$("#product_sku").css("border","1px solid green");
+		$("#product_name").css("border","1px solid green");
+		$("#product_price").css("border","1px solid green");
+		$("#product_quantity").css("border","1px solid green");
+		$("#errorQuan").html("");
+		$("#errorName").html("");
+		$("#errorPrice").html("");
+		$("#errorQuan").html("");
+        $("#product_sku").val('');
+        $("#product_name").val('');
+        $("#product_price").val('');
+        $("#product_quantity").val('');
+		b =  '<td>'+ sku +'</td>';
+		c =  '<td>'+ name +'</td>';
+		d=  '<td>$'+ price +'</td>';
+        if(confirm("Do you really want to add product")){
+            e=  '<td>'+ quantity +'</td>'+
+        '<td><a href="#" class="edit">Edit &nbsp</a><a href="#" id="delete">Delete</a></td>'+
+        '</tr>';
+        t= a+b+c+d+e;
+        $('#product_list').append(t);
+        ap='<div class="success">Product Added Successfully.<a href="#" id="close">X</a></div>';
+        $('#notification').html(ap);
+        }
+        else{
+            alert("Be careful!!!!!");
+        }
+        
+      }
+       
+    
+});
+$("#notification").on("click", "#close", function() {
+    $(this).closest("div").remove();
+ });
+
+ $("#product_list").on("click", "#delete", function() {
+    $(this).closest("tr").remove();
+ });
+
+ $("#product_list").on("click", ".edit", function() {
+    var currentRow= $(this).closest("tr"); 
+    var col1=currentRow.find("td:eq(0)").text(); 
+    var col2=currentRow.find("td:eq(1)").text(); 
+    var col3=currentRow.find("td:eq(2)").text();
+    var col4=currentRow.find("td:eq(3)").text();
+    $("#product_sku").val(col1);
+    $("#product_name").val(col2);
+    $("#product_price").val(col3);
+    $("#product_quantity").val(col4);
+    $("#add_product").val("Update");
+ });
+
+$("#product_sku").on('keyup',function(){
+	er = $("#errorSku");
+	let val = $("#product_sku").val();
+	if(val != Number(val)){
+		$("#errorSku").html("SKU should be integer!");
+		$("#product_sku").css("border","5px solid red");
+	}
+	else
+	{
+		$("#errorSku").html("");
+		$("#product_sku").css("border","1px solid black");
+	}
+});
+$("#product_name").on('keyup',function(){
+	er = $("#errorName");
+	let val = $("#product_name").val();
+	if(val == Number(val)){
+		$("#errorName").html("Enter valid details!");
+		$("#product_name").css("border","5px solid red");
+	}
+	else
+	{
+		$("#errorName").html("");
+		$("#product_name").css("border","1px solid black");
+	}
+});
+
+$("#product_price").on('keyup',function(){
+	er = $("#errorPrice");
+	let val = $("#product_price").val();
+	if(val != Number(val)){
+		$("#errorPrice").html("Price should be number!");
+		$("#product_price").css("border","5px solid red");
+	}
+	else
+	{
+		$("#errorPrice").html("");
+		$("#product_price").css("border","1px solid black");
+		
+	}
+});
+
+$("#product_quantity").on('keyup',function(){
+	er = $("#errorQuan");
+	let val = $("#product_quantity").val();
+	if(val != Number(val)){
+		$("#errorQuan").html("Quantity should be integer!");
+		$("#product_quantity").css("border","none");
+		$("#product_quantity").css("border","5px solid red");
+	}
+	else
+	{
+		$("#errorQuan").html("");
+		$("#product_quantity").css("border","1px solid black");
+	}
+});
+});
+
+
+    </script>
+</body>
+</html>
