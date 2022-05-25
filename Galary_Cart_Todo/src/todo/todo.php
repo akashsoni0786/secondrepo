@@ -74,7 +74,6 @@ if(!isset($_SESSION['completeTask'])) {
                 var txt = $(this).parent().children().eq(1).text();
                 var ids = $(this).parent()[0].id;
                 $("#hiddenText").val(ids);
-                alert(ids);
                 $(this).parent().css({"background-color":"yellow"});
                 $("#addTaskid").hide();
                 $("#updateTaskid").show();
@@ -102,7 +101,6 @@ if(!isset($_SESSION['completeTask'])) {
                 var txt = $(this).parent().children().eq(1).text();
                 var ids = $(this).parent()[0].id;
                 $("#hiddenText").val(ids);
-                alert(ids);
                 $(this).parent().css({"background-color":"green"});
                 $("#addTaskid").hide();
                 $("#updateCompTaskid").show();
