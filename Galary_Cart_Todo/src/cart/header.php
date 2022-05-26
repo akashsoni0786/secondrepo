@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +34,7 @@ li a:hover {
 				<li><a href="index.php">Home</a></li>
 				<li><a href="products.php">Products</a></li>
 				<li><a href="contact.php">Contact</a></li>
+        <li><a href="logout.php">Empty Cart</a></li>
 			</ul>
 
 </body>

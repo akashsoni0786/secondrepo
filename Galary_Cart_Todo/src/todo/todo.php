@@ -42,8 +42,7 @@ if(!isset($_SESSION['completeTask'])) {
             <h3>Todo</h3>
       
             <ul id="incomplete-tasks">
-             <?php
-
+            <?php
             for($i=0;$i<count($_SESSION['incompleteTask']);$i++)
             { 
                 echo $_SESSION['incompleteTask'][$i];
@@ -74,7 +73,7 @@ if(!isset($_SESSION['completeTask'])) {
                 var txt = $(this).parent().children().eq(1).text();
                 var ids = $(this).parent()[0].id;
                 $("#hiddenText").val(ids);
-                $(this).parent().css({"background-color":"yellow"});
+                // $(this).parent().css({"background-color":"yellow"});
                 $("#addTaskid").hide();
                 $("#updateTaskid").show();
                 $("#newtaskTxt").val(txt);
@@ -101,7 +100,7 @@ if(!isset($_SESSION['completeTask'])) {
                 var txt = $(this).parent().children().eq(1).text();
                 var ids = $(this).parent()[0].id;
                 $("#hiddenText").val(ids);
-                $(this).parent().css({"background-color":"green"});
+                // $(this).parent().css({"background-color":"green"});
                 $("#addTaskid").hide();
                 $("#updateCompTaskid").show();
                 $("#newtaskTxt").val(txt);

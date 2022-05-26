@@ -1,19 +1,13 @@
 <?php 
 session_start();
-include 'config.php';
-if(isset($_GET['addToCart'])){
-	$clickedId = $_GET['addToCart'];
-	$_SESSION['counter'] +=1;
-	$i=$_SESSION['counter'];
-	foreach($_SESSION['product'] as $j){
-		if($clickedId == $j['id']){
-			$_SESSION['addTocart'][$i] = $j;
-		}
-	}
+if(!isset($_SESSION['addTocart']))
+{
+    $_SESSION['addTocart'] = array();
 }
-// else{
-// 	session_unset();
-// }
+if(!isset($_SESSION['rows']))
+{
+	$_SESSION['rows'] = array();
+}
 
 ?>
 
@@ -23,6 +17,7 @@ if(isset($_GET['addToCart'])){
 	<title>
 		Products
 	</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<link href="style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
@@ -36,39 +31,52 @@ if(isset($_GET['addToCart'])){
 		<div id="products">
 
 		<?php include 'config.php';?>
-		<?php	foreach($_SESSION['product'] as $j){ ?>
-			<div id= <?php echo $j['id']?> class="product">
+		<?php	
+		foreach($_SESSION['product'] as $key => $j)
+		{ ?>
+			<div id= <?php echo $j['id'] ?> class="product">
 			<img src="images/<?php echo $j["image"]?>">
 			<h3 class="title"><a href="#"> <?php echo $j['productName'] ?></a></h3>
 			<span>Price: $<?php echo $j["price"] ?></span>
-			<a class="add-to-cart" href="?addToCart=<?php echo $j['id']  ?>">Add To Cart</a>
+			<a class="add-to-cart" href="server.php?cartId=<?php echo $j['id'].'&cartName='.$j['productName'].'&cartPrice='.$j["price"].'&indexes='.$key; ?>" id="adtocartID">Add To Cart</a>
 			</div>
 			<?php } ?> 
 		</div>
 	</div>
-
 	<div>
-		<table style="height: 50px;border-collapse: collapse;width: 90%;margin-left: 5%;margin-right: 5%;">
+		<table id="addToCartTable" style="height: 50px;border-collapse: collapse;width: 90%;margin-left: 5%;margin-right: 5%;">
 			<tr style="background-color:#3e9cbf ;color: white;">
-			<th style="width: 25%;">Id</th>
-			<th style="width: 25%;">Name</th>
-			<th style="width: 25%;">Price</th>
-			<th style="width: 25%;">Quantity</th>
+			<th style="width: 20%;">Id</th>
+			<th style="width: 20%;">Name</th>
+			<th style="width: 20%;">Price</th>
+			<th style="width: 20%;">Quantity</th>
+			<th style="width: 20%;">Action</th>
 			</tr>
-			<?php foreach($_SESSION['addTocart'] as $i){?>
-			<tr style="text-align:center">
-			<td style="width: 25%;"><?php echo $i['id']?></td>
-			<td style="width: 25%;"><?php echo $i['productName']?></td>
-			<td style="width: 25%;"><?php echo $i['price']?></td>
-			<td style="width: 25%;"> 1 </td>
-			</tr> <?php }?>
+			<?php 
+			for($i=0;$i<count($_SESSION['rows']);$i++)
+			{ 
+				echo $_SESSION['rows'][$i];
+			}
+			?>
 			
 		</table>
 	</div>
 	<div id="footer">
 		<nav>
-				<?php include "footer.php"?>
+			<?php include "footer.php"?>
 		</nav>
 	</div>
+<script>
+	$(document).ready(function()
+	{
+		$("#addToCartTable").on('click',"#deleteId",function()
+		{
+			
+			var id = $(this).parent().children().eq(0).text();
+			window.location.href = "server.php?delId="+id;
+			$(this).parent().children().eq(2).remove();
+		});
+	});
+</script>
 </body>
 </html>
