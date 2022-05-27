@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time</title>
+    <style>
+        #timeDiv span
+        {
+            font-size: 65px;
+            font-weight: 500;
+        }
+        #dayDates
+        {
+            padding-left: 15%;
+            padding-right: 15%;
+            color: white;
+        }
+        #timeDiv
+        {
+            color: white;
+        }
+        #parentDiv{
+            background-color: black;
+            padding: 8%;
+            max-width: 30%;
+        }
+        #stopwatch{
+            margin-top: 2%;
+            padding: 8%;
+            background-color: blue;
+            color: white;
+            font-size: 2rem;
+            max-width: 30%;
+        }
+        #laptimeTable{
+            font-size: 1rem;
+        }
+        #digitalWatch{
+            margin-top: 2%;
+            padding: 8%;
+            background-color: red;
+            color: white;
+            font-size: 2rem;
+            max-width: 30%; 
+        }
+        #setTime{
+            font-size: 65px;
+            font-weight: 500;
+            color: white;
+        }
+        #upperDateDay
+        {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div><p style="font-size: 2rem;" >Live Time :</p></div>
+<div id="parentDiv">
+<div id="dayDates">
+    <span id="days"></span>
+    <span id="dates"></span>
+    <span id="monthss"></span>
+    <span id="years"></span>
+</div>
+
+<div id="timeDiv">
+    <span id="hours"></span><span>:</span>
+    <span id="minutes"></span><span>:</span>
+    <span id="seconds"></span>
+</div>
+</div>
+
+<div><p style="font-size: 2rem;color: blue;" >Stop Watch :</p></div>
+<div id="stopwatch">
+
+<div id="runningTime">
+    <span id="stopminutes">0</span><span>:</span>
+    <span id="stopsecond">0</span><span>:</span>
+    <span id="stopmiliseconds">0</span>
+</div>
+
+
+<div>
+    <button id="stopWatchStart">Start</button>
+    <button id="stopWatchRestart">Restart</button>
+    <button id="stopWatchStop">Stop</button>
+    <button id = 'laptime'>Laptime</button>
+</div>
+<div>
+    <table id="laptimeTable">
+    </table>
+</div>
+
+</div>
+
+<div><p style="font-size: 2rem;" >Digital Watch Set by yourself :</p></div>
+<div><span><input type="text" id="setHour" placeholder="Enter hour"></span>
+    <span><input type="text" id="setMinute" placeholder="Enter Minute"></span>
+    <span><input type="text" id="setSecond" placeholder="Enter Second"></span><br>
+    <span><input type="text" id="setDate" placeholder="Enter Date"></span>
+    <span><select id="setMonth">
+        <option selected disabled>Select Month</option>
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>NOvember</option>
+        <option>December</option>
+    </select></span>
+    <span><input type="text" id="setYear" placeholder="Enter Year"></span>
+    <span><select id="Days">
+        <option selected disabled>Select Day</option>
+        <option>Sunday</option>
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option>Saturday</option>
+    </select></span>
+
+    <span><input type="button" value="Submit" id="setime" placeholder="Enter Second"></span>
+</div>
+<div id="digitalWatch">
+    <div id="upperDateDay"><span id="myDay">Monday</span>
+    <span id="myDate">22</span>
+    <span id="myMonth">May</span>
+    <span id="myYear">2001</span></div>
+    <div id="setTime">
+        <span id="myHours">hh</span><span>:</span>
+        <span id="myMinutes">mm</span><span>:</span>
+        <span id="mySeconds">ss</span>
+    </div>
+</div>
+
+    <script>
+    $(document).ready(function(){
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+            
+        var start = 0;
+        var mili = 0;
+        var mint = 0;
+        var m;
+        var ms;
+        setInterval(displayTime, 1000);
+        $('#laptime').prop( "disabled", true );
+        $('#stopWatchStop').prop( "disabled", true );
+        function displayTime() 
+        {   
+            const d = new Date();
+            var dt = d.getDate();
+            var month = months[d.getMonth()];
+            var year = d.getFullYear()
+            var week = days[d.getDay()];
+            var hours = d.getHours();
+            var min = d.getMinutes();
+            var sec = d.getSeconds();
+            document.getElementById('hours').innerHTML=hours;
+            document.getElementById('minutes').innerHTML=min;
+            document.getElementById('seconds').innerHTML=sec;
+            document.getElementById('days').innerHTML=week;
+            document.getElementById('dates').innerHTML=dt;
+            document.getElementById('monthss').innerHTML=month;
+            document.getElementById('years').innerHTML=year;
+        }
+        
+        function stopMinSeconds()
+        {
+            start = start+1;
+            $('#stopWatchStart').text('Resume');
+            $('#stopWatchStart').prop( "disabled", true );
+            $('#stopWatchStop').prop( "disabled", false );
+            $('#laptime').prop( "disabled", false );
+            if(start >60)
+            {
+                start =0;
+                mint = mint +1;
+                $('#stopminutes').html(mint);
+                $('#stopsecond').html(start);
+                
+            }
+            else
+            {
+                $('#stopsecond').html(start);
+               
+            }
+        }
+
+        function milisecond()
+        {
+            mili = mili+1;
+            if(mili>99){
+                mili =0;
+                $('#stopmiliseconds').html(mili);
+            }
+            else{
+                $('#stopmiliseconds').html(mili);
+            }
+        }
+            
+        $("#stopWatchStart").click(function(){
+            m = setInterval(stopMinSeconds, 1000);
+            ms = setInterval(milisecond, 10);
+        });
+        
+        $("#stopWatchRestart").click(function(){
+            document.getElementById('runningTime').childNodes[1].innerHTML = 0;
+            document.getElementById('runningTime').childNodes[4].innerHTML = 0;
+            document.getElementById('runningTime').childNodes[7].innerHTML = 0;
+            $('#stopWatchStart').text('Start');
+        });
+        
+
+        $("#stopWatchStop").click(function(){
+            clearInterval(m);
+            clearInterval(ms);
+            $('#stopWatchStart').prop( "disabled", false );
+            $('#stopWatchStop').prop( "disabled", true );
+            $('#laptime').prop( "disabled", true );
+            
+        });
+        
+
+        $("#laptime").click(function(){
+            var stopmints;
+            var stopseconds;
+            var stopmiliseconds;
+            stopmints = document.getElementById('runningTime').childNodes[1].innerHTML;
+            stopseconds = document.getElementById('runningTime').childNodes[4].innerHTML;
+            stopmiliseconds = document.getElementById('runningTime').childNodes[7].innerHTML;
+            var lap = '<ul><li><td>'+stopmints+'</td><td>:</td><td>'+stopseconds+'</td><td>:</td><td>'+stopmiliseconds+'</td></li></ul>';
+            $("#laptimeTable").append(lap);
+        });
+       
+         function setTimeDigital()
+         { 
+              console.log("Helll");
+
+            var hr = parseInt($('#myHours').text());
+            var mn = parseInt($('#myMinutes').text());
+            var sc =parseInt($('#mySeconds').text());
+            
+            if(sc==60)
+            {
+                sc=0;
+                $('#myHours').text();
+                $('#myMinutes').text(mn+1);
+                $('#mySeconds').text(sc+1);
+            }
+            if(mn==60)
+            {
+                sc=0;
+                mn=0;
+                $('#myHours').text();
+                $('#myMinutes').text(mn);
+                $('#mySeconds').text(sc+1);
+            }
+            if(hr==24)
+            {
+                sc=0;
+                mn=0;
+                hr=0;
+                $('#myHours').text(hr);
+                $('#myMinutes').text(mn);
+                $('#mySeconds').text(sc+1);
+            }
+
+            else{
+                $('#myHours').text();
+                $('#myMinutes').text();
+                $('#mySeconds').text(sc+1);
+            }
+            
+            
+
+            
+        }
+
+        $('#setime').click(function()
+        {  
+            var h = $('#setHour').val();
+            var m = $('#setMinute').val();
+            var s = $('#setSecond').val();
+            var day =  document.getElementById('Days');
+            var selectedDay = day.options[day.selectedIndex].value;
+            var mnth = document.getElementById('setMonth');
+            var selectedMonth = mnth.options[mnth.selectedIndex].value;
+            var date = $('#setDate').val();
+            var year = $('#setYear').val();
+
+            if(h == '' || m == '' || s==''){
+                alert("Field is empty");
+            }
+            else if(isNaN(h)){
+                alert("Please enter hours in number")
+            }
+            else if(isNaN(m)){
+                alert("Please enter minutes in number")
+            }
+            else if(isNaN(s)){
+                alert("Please enter seconds in number")
+            }
+            else if(h >24){
+                alert("Invalid hour");
+            }
+            else if(m >60){
+                alert("Invalid minutes");
+            }
+            else if(s >60){
+                alert("Invalid seconds");
+            }
+            else if(date>31 || isNaN(date)){
+                alert('Enter valid Date');
+            }
+            else if(year<1000 || isNaN(year)){
+                alert('Enter valid Year(greater than 1000)');
+            }
+            else if(selectedDay=='Select Day'){
+                alert('Please select day');
+            }
+            else if(selectedMonth=='Select Month'){
+                alert('Please select Month');
+            }
+            else
+            {
+            $('#myHours').text(h);
+            $('#myMinutes').text(m);
+            $('#mySeconds').text(s);
+
+            $('#myDay').text(selectedDay);
+            $('#myDate').text(date);
+            $('#myMonth').text(selectedMonth);
+            $('#myYear').text(year);
+            }
+            
+            
+            
+            setInterval(setTimeDigital,1000);
+        });
+
+    });
+    
+        </script>
+</body>
+</html>
