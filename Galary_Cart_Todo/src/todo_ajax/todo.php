@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <html>
     <head>
         <title>TODO List</title>
@@ -12,13 +16,15 @@
                 <input id="new-task" type="text"><button id="addBtn">Add</button>
             </p>
             <h3>Todo</h3>
-            <ul id="incomplete-tasks" class=<?php  echo $idIN ?>>
+            <ul id="incomplete-tasks">
             </ul>
     <div id="CompleteTasks">
             <h3>Completed</h3>
             <ul id="completed-tasks">
-                <li><input type="checkbox" checked id="completeChecked"><label>See the Doctor</label><input type="text">
-                <button class="edit" id="editTaskBtn">Edit</button><button class="delete">Delete</button></li>
+                <li><input type="checkbox" checked id="completeChecked">
+                <label>See the Doctor</label><input type="text">
+                <button class="edit" id="editTaskBtn">Edit</button>
+                <button class="delete">Delete</button></li>
             </ul></div>
         </div>
     <script>

@@ -1,21 +1,5 @@
 <?php
 session_start();
-
-// function display(){
-//     for($i=0;$i<count($_SESSION['addTocart']);$i++)
-//     {
-//         $row = '<tr style="text-align:center">
-//                 <td>'.$_SESSION['addTocart'][$i]['id'].'</td>
-//                 <td>'.$_SESSION['addTocart'][$i]['name'].'</td>
-//                 <td>'.$_SESSION['addTocart'][$i]['price'].'</td>
-//                 <td>'.$_SESSION['addTocart'][$i]['quantity'].'</td>
-//                 <td id="deleteId" name="deleteName"><a href="#">Delete</a></td>
-//                 </tr>';
-                
-//         $_SESSION['rows'][$i] = $row;
-//     }
-// }
-
 function display(){
     $count=0;
     foreach($_SESSION['addTocart'] as $i)
@@ -32,7 +16,6 @@ function display(){
         $count++;
     }
 }
-
 if(isset($_GET['cartId']))
 {
     $cId = $_GET['cartId'];
@@ -55,9 +38,7 @@ if(isset($_GET['cartId']))
         $_SESSION['addTocart'][$cIndex]=$rowVal;
         display();
     }
-     
 }
-
 if(isset($_GET['delId']))
 {
     $id= $_GET['delId'];
@@ -66,6 +47,5 @@ if(isset($_GET['delId']))
     array_splice($_SESSION['rows'],0);
     display();
 }
-
 header('location: ./products.php');
 ?>
