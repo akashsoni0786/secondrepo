@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adevance</title>
+</head>
+<body>
+    <table id="values">
+    </table>
+    <script>
+    var t='<tr><th>Id</th><th>Name</th><th>Total Salary</th></tr>';
+    var allData = 
+        [
+                {'Id':101,'Name':'John1','Total_Salary':100000},
+                {'Id':102,'Name':'John2','Total_Salary':100000},
+                {'Id':103,'Name':'John3','Total_Salary':100000},
+                {'Id':104,'Name':'John4','Total_Salary':100000},
+                {'Id':105,'Name':'John5','Total_Salary':100000},
+                {'Id':106,'Name':'John6','Total_Salary':100000},
+                {'Id':107,'Name':'John7','Total_Salary':100000},
+                {'Id':108,'Name':'John8','Total_Salary':100000},
+                {'Id':109,'Name':'John9','Total_Salary':100000},
+        ];
+class AllData {
+  constructor(id,name,salary) {
+    this.id = id;
+    this.name = name;
+    this.salary = salary;
+  }
+  
+}
+for(let i=0;i<allData.length;i++)
+{
+    person1 = new AllData(allData[i].Id,allData[i].Name,allData[i].Total_Salary);
+    t += '<tr><td>'+person1.id+'</td><td>'+person1.name+'</td><td>'+person1.salary+'</td></tr>';
+    document.getElementById('values').innerHTML =t;
+}
+
+    </script>
+</body>
+</html>

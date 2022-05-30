@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adevance</title>
+</head>
+<body>
+    <table id="values">
+        <tr><th>Id</th><th>Name</th><th>Total Salary</th></tr>
+    </table>
+    <script>
+
+    var emp1 = '{"Id":101,"Name":"John","Total_Salary":60000}';
+    var emp2 = '{"Id":102,"Name":"Mark","Total_Salary":10600}';
+    var emp3 = '{"Id":103,"Name":"Yash","Total_Salary":0}';
+    var emp4 = '{"Id":104,"Name":"Minu","Total_Salary":16300}';
+    var emp5 = '{"Id":105,"Name":"Piku","Total_Salary":-7}';
+    var emp6 = '{"Id":106,"Name":"Titu","Total_Salary":63000}';
+    var emp7 = '{"Id":107,"Name":"Nunu","Total_Salary":60000}';
+    var emp8 = '{"Id":108,"Name":"Kuku","Total_Salary":0}';
+    var emp9 = '{"Id":109,"Name":"Maku","Total_Salary":50030}';
+
+    buildData(emp1);
+    buildData(emp2);
+    buildData(emp3);
+    buildData(emp4);
+    buildData(emp5);
+    buildData(emp6);
+    buildData(emp7);
+    buildData(emp8);
+    buildData(emp9);
+
+    function buildData(data)
+    {
+      data= JSON.parse(data);
+      try{
+        var table = document.getElementById('values');
+      if(data.Total_Salary <=0){
+        var t = '<tr><td>'+data.Id+'</td><td>'+data.Name+'</td><td style="color:red">Error in salary</td></tr>';
+        table.innerHTML += t;
+      }
+      else{
+          var t = '<tr><td>'+data.Id+'</td><td>'+data.Name+'</td><td>'+data.Total_Salary+'</td></tr>';
+            table.innerHTML += t;
+    }
+      }
+      catch(e)
+      {
+        alert(e);
+      }
+      
+      
+    }
+
+    </script>
+</body>
+</html>

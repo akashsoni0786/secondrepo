@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js Array</title>
+    <style>
+        th{
+            width: 20%;
+        }
+        td{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 40%;height: 50%;">
+        <table id="listOfProduct" style="border: 1px solid black;border-collapse: collapse;">
+        </table> 
+    </div><br><br>
+
+<div>
+   <tr><td><input type="number" placeholder="minimum price" id="minPrice"></td>
+   <td><input type="number" placeholder="maximum price" id="maxPrice"></td>
+   <td><button onclick="priceRange()">Submit</button></td></tr>
+</div>
+    
+<div style="width: 40%;height: 50%;">
+    <table id="listOfProductSorted" style="border: 1px solid black;border-collapse: collapse;">
+    </table> 
+</div><br><br>
+
+<div>
+<script>
+var t;
+
+let productObj = [];
+productObj[0]= {"Company":"Samsang","Model":"Galaxy","Memory":64,"Price":15000};
+productObj[1]={"Company":"Nokia","Model":"S780","Memory":128,"Price":22000};
+productObj[2]={"Company":"Xaiomi","Model":"Note","Memory":32,"Price":12000};
+productObj[3]={"Company":"Motorola","Model":"G10","Memory":32,"Price":15000};
+
+t = '<tr><th>Company</th><th>Model</th><th>Memory</th><th>Price</th><tr>';
+    productObj.forEach(i =>{
+        t+='<tr><td>'+i.Company+'</td><td>'+i.Model+'</td><td>'+i.Memory+
+            '</td><td>'+i.Price+'</td></tr>';
+    });
+document.getElementById('listOfProduct').innerHTML = t
+
+function priceRange(){
+    var table = document.getElementById("listOfProductSorted");
+    table.innerHTML='';
+    var min = document.getElementById("minPrice").value;  
+    var max = document.getElementById("maxPrice").value;
+    var row = table.insertRow();
+                var cell1 = row.insertCell(0);
+                cell1.innerHTML = "Company";
+                var cell2 = row.insertCell(1);
+                cell2.innerHTML = "Model";
+                var cell3 = row.insertCell(2);
+                cell3.innerHTML = "Memory";
+                var cell4 = row.insertCell(3);
+                cell4.innerHTML = "Price";
+    for(let i=0;i<productObj.length;i++){
+    if(min <= productObj[i].Price && productObj[i].Price <= max){
+            var row = table.insertRow();
+            var cell1 = row.insertCell(0);
+            cell1.innerHTML = productObj[i].Company;
+            var cell2 = row.insertCell(1);
+            cell2.innerHTML = productObj[i].Model;
+            var cell3 = row.insertCell(2);
+            cell3.innerHTML = productObj[i].Memory;
+            var cell4 = row.insertCell(3);
+            cell4.innerHTML = productObj[i].Price;
+        }
+    }
+}
+
+
+
+    </script>
+</body>
+</html>

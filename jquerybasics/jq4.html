@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>jquery</title>
+</head>
+<body>
+    <div class="addStudentValue">
+        <table class="addDetails">
+            <tr>
+                <td><input type="text" placeholder="Enter Class"></td>
+                <td><input type="text" placeholder="Enter Board"></td>
+                <td><input type="text" placeholder="Enter Marks"></td>
+                <td><input type="text" placeholder="Enter Division"></td>
+                <td><button class='addValue'>+</button></td>
+                <td><button class='deleteValue'>-</button></td>
+            </tr>
+        </table>
+    </div>
+
+<script>
+$(document).ready(function(){
+    $(".addStudentValue").on("click","button",function()
+{
+    var new_line = $(this).attr('class');
+    if(new_line == 'addValue')
+    {
+      table_body = $(".addDetails");
+      values = '<tr><td><input type="text" placeholder="Enter Class"></td><td><input type="text" placeholder="Enter Board"></td><td><input type="text" placeholder="Enter Marks"></td><td><input type="text" placeholder="Enter Division"></td><td><button class="addValue">+</button></td><td><button class="deleteValue">-</button></td></tr>';
+      table_body.append(values);
+    }
+    else if( new_line == 'deleteValue')
+    {
+      $(this).closest('tr').remove();
+    }
+});
+
+
+});
+    </script>
+</body>
+</html>

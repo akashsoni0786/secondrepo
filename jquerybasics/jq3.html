@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="jquery.js" defer></script>
+    <style>
+        th,td{
+            width: 200px;
+            text-align: center;
+            }
+    </style>
+</head>
+<body>
+
+<form id="firstLastName" action="#">
+    <table>
+   
+        <tr>First Name</tr><br>
+        <tr><input id="firstName" type="text" ></tr><br>
+    
+  
+        <tr>Last Name</tr><br>
+        <tr><input id="lastName" type="text" ></tr><br>
+        
+    
+    <tr><button id="submitNames" type="submit">Submit</button></tr></table>
+</form>
+
+
+<script>
+    
+$(document).ready(function(){
+
+$("#conPass").keyup(function(){
+    if($(this).val() != $("#passwrd").val().substr(0,$(this).val().length)){
+        $("#errorSuggession").text("Password didn't match!");
+        $("#errorSuggession").css("color","red");
+    }
+});
+
+$("#submitNames").click(function(){
+    if($("#firstName").val() == ""){
+        $("#firstName").css("background-color" ,"red" );
+    }
+    else if($("#lastName").val() == ""){
+        $("#lastName").css("background-color" ,"red" );
+    }
+    else{
+        $("#firstName").css("background-color" ,"white" );
+        $("#lastName").css("background-color" ,"white" );
+        if(confirm('Do you want to submit?'))
+        {
+            $("#firstName").val("");
+            $("#lastName").val("");
+        }
+       
+        
+    }
+});
+
+$("#firstName").keyup(function(){
+    if($("#firstName").val() == ""){
+        $("#firstName").css("background-color" ,"red" );
+    }
+    else{
+        $("#firstName").css("background-color" ,"white" );
+    }
+});
+
+$("#lastName").keyup(function(){
+   if($("#lastName").val() == ""){
+        $("#lastName").css("background-color" ,"red" );
+    }
+    else{
+        $("#lastName").css("background-color" ,"white" );
+    }
+});
+});
+</script>
+</body>
+</html> 
+
+
+

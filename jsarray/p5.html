@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="width: 40%;height: 50%;float: left;">
+        <table id="listOfProduct" >
+           
+        </table>
+        <button onclick="deleteRow(this)">Delete</button> 
+    </div>
+
+    <script>
+ var t = "";
+let product = 
+[
+  
+    ["Samsang","Galaxy",64,15000],
+    ["Nokia","S780",128,22000],
+    ["Xaiomi","Note",32,12000,],
+    ["Motorola","G10",32,15000]
+];
+
+deleteTab();
+    function deleteTab(){
+       
+    t = "<tr><th>Company</th><th>Model</ht><th>Memory</th><th>Price</th><th>Action</th></tr>";
+    for(let i=0;i<4;i++){
+        t += "<tr>";
+        t += "<td>"+ product[i][0] +"</td><td>"+product[i][1] +"</td><td>"+product[i][2] +"</td><td>"+product[i][3] +"</td>";
+        t += "<td><input type = 'checkbox' id = '"+product[i][0]+"' value = '"+product[i][0]+"'></td></tr><tr>";
+        t += "</tr>";
+    }
+    document.getElementById("listOfProduct").innerHTML += t;
+    }
+
+    function deleteRow()
+    {
+        var t1='';
+        var values =[];
+        for(let i=0;i<product.length;i++)
+        {
+        var chk = document.getElementById(product[i][0]).checked;
+        if(chk == true){
+          values.push(product[i][0]);
+       }
+    }
+    if(values.length ==0){
+        alert("Please take action");
+    }
+    for(let i=0;i<values.length;i++)
+    {
+        for(let j=0;j<product.length;j++){
+            if(product[j][0] == values[i])
+            product.splice(j,1);
+      }
+        }
+    
+        t1 = "<table><tr><th>Company</th><th>Model</ht><th>Memory</th><th>Price</th><th>Action</th></tr>";
+    for(let i=0;i<product.length;i++){
+       t1 += "<tr>";
+       for(let j=0;j<product[i].length;j++){
+          t1 += "<td>"+product[i][j]+"</td>";
+       }
+       t1 += "<td><input type = 'checkbox' id = '"+product[i][0]+"' value = '"+product[i][0]+"'></td></tr>";
+    }
+    t1 += "</table>";
+    document.getElementById("listOfProduct").innerHTML = t1;
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="width: 40%;height: 50%;float: left;">
+        <table id="listOfProduct" >
+        </table> 
+    </div>
+    
+    <div style="width: 60%;">
+        <table id="billTable">
+            <tr>  
+                <td> 
+                    <select  id="products">
+                         <option disabled selected>Select Product</option>
+                         <option value="Samsang">Samsang</option>
+                         <option value="Nokia">Nokia</option>
+                         <option value="Xaiomi">Xaiomi</option>
+                         <option value="Motorola">Motorola</option>   
+                     </select>
+                 </td>
+                 <td>
+                     <Input id="quantity" placeholder="Enter quantity"></Input>
+                 </td>
+                 <td><button onclick="addToCartForBill()">Add</button></td>
+                 <td><button onclick="generateBill()">Generate Bill</button></td>
+             </tr>
+        </table>
+       <div id="tableDiv"></div>
+       <table id="totalBillId"></table>
+    </div>
+<script>
+var addToCartProducts={};
+
+let productObj = [];
+let len = Object.keys(productObj).length;
+productObj["Samsang"]= {"Company":"Samsang","Model":"Galaxy","Memory":64,"Price":15000,"Quantity":20};
+productObj["Nokia"]={"Company":"Nokia","Model":"S780","Memory":128,"Price":22000,"Quantity":26};
+productObj["Xaiomi"]={"Company":"Xaiomi","Model":"Note","Memory":32,"Price":12000,"Quantity":40};
+productObj["Motorola"]={"Company":"Motorola","Model":"G10","Memory":32,"Price":15000,"Quantity":30};
+display();
+function display()
+{
+    t = '<tr><th>Company</th><th>Model</th><th>Memory</th><th>Price</th><th>Quantity</th></tr>';
+    for(let i=0;i<4;i++){
+        t+='<tr><td>'+productObj[Object.keys(productObj)[i]].Company+
+            '</td><td>'+productObj[Object.keys(productObj)[i]].Model+
+            '</td><td>'+productObj[Object.keys(productObj)[i]].Memory+
+            '</td><td>'+productObj[Object.keys(productObj)[i]].Price+'</td><td>'+
+            productObj[Object.keys(productObj)[i]].Quantity+'</td></tr>';
+    }
+document.getElementById('listOfProduct').innerHTML = t
+}
+
+
+
+    function addToCartForBill()
+    {
+    var t ='';
+    var selectedItem = document.getElementById("products").value;
+    var quant = document.getElementById("quantity").value;
+
+    if(quant == "" || selectedItem == "")
+    {
+       alert("Field is empty");
+    }
+
+    else if(isNaN(quant))
+    {
+        alert("Please enter integer value");
+    }
+    else
+    {
+    let len = Object.keys(productObj).length;
+    for(let i=0;i<len;i++)
+        {
+        if(selectedItem==productObj[Object.keys(productObj)[i]].Company)
+        {
+            if(quant < productObj[Object.keys(productObj)[i]].Quantity)
+            {
+                alert(Object.keys(addToCartProducts));
+                // alert(addToCartProducts.hasOwnProperty(productObj[Object.keys(productObj)[i]].Company));
+                if(addToCartProducts.hasOwnProperty(productObj[Object.keys(productObj)[i]].Company) == false)
+                {
+                alert(productObj[Object.keys(productObj)[i]].Quantity);
+                productObj[Object.keys(productObj)[i]].Quantity = parseInt(productObj[Object.keys(productObj)[i]].Quantity) - parseInt(quant);
+                addToCartProducts[productObj[Object.keys(productObj)[i]].Company] = {productName : productObj[Object.keys(productObj)[i]].Company, quantity : quant, price : productObj[Object.keys(productObj)[i]].Price};
+                addToCartProducts[productObj[Object.keys(productObj)[i]].Company].price = addToCartProducts[productObj[Object.keys(productObj)[i]].Company].price * quant;               
+                txt='<table><tr><th>Product</th><th>Quantity</th><th>Price</th></tr>';
+                let l = Object.keys(addToCartProducts).length;
+                for(let k=0;k<l;k++) 
+                {
+                    txt += "<tr><td>"+addToCartProducts[Object.keys(addToCartProducts)[k]].productName +
+                           "</td><td>"+addToCartProducts[Object.keys(addToCartProducts)[k]].quantity +"</td><td>"+ 
+                           addToCartProducts[Object.keys(addToCartProducts)[k]].price+
+                           "</td></tr>";
+                }
+                txt +='</table>';
+                document.getElementById("tableDiv").innerHTML = txt;
+                display();
+            }
+
+
+            else
+            {
+            alert(productObj[Object.keys(productObj)[i]].Quantity);
+            productObj[Object.keys(productObj)[i]].Quantity = parseInt(productObj[Object.keys(productObj)[i]].Quantity) - parseInt(quant);
+            addToCartProducts[productObj[Object.keys(productObj)[i]].Company].quantity = parseInt(addToCartProducts[productObj[Object.keys(productObj)[i]].Company].quantity) +parseInt(quant);
+            addToCartProducts[productObj[Object.keys(productObj)[i]].Company].price =parseInt(productObj[Object.keys(productObj)[i]].Price)*parseInt(addToCartProducts[productObj[Object.keys(productObj)[i]].Company].quantity);
+            txt='<table><tr><th>Product</th><th>Quantity</th><th>Price</th></tr>';
+            let l = Object.keys(addToCartProducts).length;
+            for(let k=0;k<l;k++) 
+            {
+                txt += "<tr><td>"+addToCartProducts[Object.keys(addToCartProducts)[k]].productName +
+                       "</td><td>"+addToCartProducts[Object.keys(addToCartProducts)[k]].quantity +"</td><td>"+ 
+                       addToCartProducts[Object.keys(addToCartProducts)[k]].price+
+                       "</td></tr>";
+            }
+            txt += "</table>";
+            document.getElementById("tableDiv").innerHTML = txt;
+            display();
+            }
+        
+            }
+            
+            else{
+                alert("Sorry we have only limited stocks!");
+            }
+        }
+        }
+        }
+    }
+
+    function generateBill()
+        {
+          
+
+            let l = Object.keys(addToCartProducts).length;
+            var total =0;
+            for(let k=0;k<l;k++) 
+            {
+            total +=addToCartProducts[Object.keys(addToCartProducts)[k]].price;
+            }
+            row = "<tr><td>Total</td><td>----------------</td><td>"+total+"</td></tr>";
+            document.getElementById("totalBillId").innerHTML = row;
+        }
+        
+</script>
+</body>
+</html>

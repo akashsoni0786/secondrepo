@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advance</title>
+</head>
+<body>
+    <table id="addValue">
+        <tr><td>Id :</td>
+        <td><input type="text" id="enterId" onkeyup="warningIdEntry()"><span id="idWarning" style="color:red"></span></td></tr>
+        <tr><td> Name :</td><td><input type="text" onkeyup="warningNameEntry()" id="enterName"><span style="color:red" id="nameWarning"></span></td> </tr>
+        <tr><td> Basic Sal :</td><td><input type="text" onkeyup="warningSalaryEntry()" id="enterSalary"><span style="color:red" id="salaryWarning"></span></td></tr>
+    </table>
+    <tr><Button onclick="addDetails()">Add</Button></tr>
+    <table id="values">
+    </table>
+    <script>
+        var t=' <tr><th>Id</th><th>Name</th><th>Total Salary</th><th>Action</th></tr>';
+function addDetails()
+{
+    enteredId = document.getElementById('enterId').value;
+    enteredName = document.getElementById('enterName').value;
+    enteredSalary = document.getElementById('enterSalary').value;
+    if(enteredId == '')
+    {
+        document.getElementById('idWarning').innerHTML="  Field is empty!";
+    }
+    if(enteredName =='')
+    {
+        document.getElementById('nameWarning').innerHTML="  Field is empty!";
+        
+    }
+    if(enteredSalary =='')
+    {
+        document.getElementById('salaryWarning').innerHTML="  Field is empty!";
+    }
+    else if(isNaN(enteredId))
+    {
+        document.getElementById('idWarning').innerHTML="  Please enter number !";
+    }
+    else if(!isNaN(enteredName))
+    {
+        document.getElementById('nameWarning').innerHTML="  Please enter name !";
+    }
+    else if(isNaN(enteredSalary))
+    {
+        document.getElementById('salaryWarning').innerHTML="  Please enter number !";
+    }
+    else
+    {
+        t += '<tr><td>'+enteredId+'</td><td>'+enteredName+'</td><td>'+enteredSalary+'</td><td><a href="#" onclick="deleteRow(this)">Delete</a></td></tr>';
+        document.getElementById('values').innerHTML =t;
+        document.getElementById('enterId').value = '';
+        document.getElementById('enterName').value='';
+        document.getElementById('enterSalary').value='';
+
+    }
+}
+
+function deleteRow(val){
+var del = val.parentElement.parentElement;
+del.remove();
+}
+  
+function warningIdEntry()
+{
+    enteredId = document.getElementById('enterId').value;
+    if(isNaN(enteredId))
+    {
+        document.getElementById('idWarning').innerHTML="  Please enter number !";
+    }
+    else
+    {
+        document.getElementById('idWarning').innerHTML="";
+    }
+}
+
+function warningNameEntry()
+{
+    enteredName = document.getElementById('enterName').value;
+    if(!isNaN(enteredName))
+    {
+        document.getElementById('nameWarning').innerHTML="  Please enter name !";
+    }
+    else{
+        document.getElementById('nameWarning').innerHTML="";
+    }
+}
+
+function warningSalaryEntry()
+{
+    enteredSalary = document.getElementById('enterSalary').value;
+    if(isNaN(enteredSalary))
+    {
+        document.getElementById('salaryWarning').innerHTML="  Please enter number !";
+    }
+    else
+    {
+        document.getElementById('salaryWarning').innerHTML="";
+    }
+}
+    </script>
+</body>
+</html>

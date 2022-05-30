@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+</head>
+<style>
+    td{
+        text-align: center;
+    }
+   
+</style>
+<body>
+    <table>
+        <h2>Products</h2>
+        <tr><th style="width: 150px;">Name</th><th style="width: 150px;">Size/Color</th>
+        <th style="width: 150px;">Price</th></tr>
+
+        <tr>
+            <td>Duffle Bag</td>
+        
+            <td><select id="selectSize">
+                <option selected disabled>Size</option>
+            <option value="1000">Small</option>
+            <option value="1300">Medium</option>
+            <option value="1500">Large</option>
+        </select></td>
+        
+        <td id="price1">----</td>
+        </tr>
+
+        <tr>
+            <td>T-Shirt</td>
+        
+            <td>
+            <select id="selectColor">
+            <option selected disabled>Color</option>
+            <option value="1000">Light Grey</option>
+            <option value="1500">Red</option>
+            <option value="2000">Black</option>
+            </select></td>
+        
+        <td id="price2">----</td>
+        </tr>
+    </table>
+          
+       <script>
+
+           
+        $(document).ready(function()
+        {    
+            $("#selectSize").change(function(){
+                var optnValue = $('#selectSize :selected').val();
+                $('#price1').html(optnValue);
+            });
+            $("#selectColor").change(function(){
+                var optnValue = $('#selectColor :selected').val();
+                $('#price2').html(optnValue);
+            });
+            $(".paraID").click(function(){
+                alert("You are inside the paragraph");
+            });
+            $(".finalCategoryDiv").on('click','button',function(){
+                var new_line = $(this).attr('class');
+                if(new_line == "itemListBtn"){
+                    catUlBody = $(".categoryList");
+                    catVal = "<ul><li><a href='#'>"+ "Item"+"<button class='itemListBtn'>+</button></a></li></ul>";
+                    catUlBody.append(catVal);
+                }
+
+                else if(new_line == "categoryListBtn"){
+                    catUlBody = $(".finalCategoryDiv");
+                    catVal = "<ul><li><a href='#'>"+ "Category"+"<button class='categoryListBtn'>+</button></a></li></ul>";
+                    catUlBody.append(catVal);
+                }
+            });
+
+
+        });
+       </script>
+</body>
+</html>

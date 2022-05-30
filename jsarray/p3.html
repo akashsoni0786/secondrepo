@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div style="width: 5%;height: 50%;float: right;">
+        <table style="float: right;">
+        <tr><td><a></a></td><td><b><u>Add Products </u> </b></td></tr>
+        <tr>
+            <td>Company</td>
+        <td><input type="text" id="Company" required></td></tr>
+        <tr>
+            <td>Model</td>
+        <td><input type="text" id="Model" required></td></tr>
+        <tr>
+            <td>Memory</td>
+        <td><input type="text" id="Memory" required></td></tr>
+        <tr>
+            <td>Price</td>
+        <td><input type="text" id="Price" required></td></tr>
+        <tr>
+            <td><a></a></td><td><button onclick="addProducts()">Add Product</button></td></tr>
+        </table></div>
+    <div style="width: 40%;height: 50%;float: left;">
+        <table id="listOfProduct" >
+        </table> 
+    </div>
+
+    <script>
+
+
+let product = 
+[
+  
+    ["Samsang","Galaxy",64,15000],
+    ["Nokia","S780",128,22000],
+    ["Xaiomi","Note",32,12000,],
+    ["Motorola","G10",32,15000]
+];
+
+
+    var t = "";
+    t = "<tr><th>Company</th><th>Model</ht><th>Memory</th><th>Price</th></tr>";
+    for(let i=0;i<4;i++){
+        t += "<tr>";
+        t += "<td>"+ product[i][0] +"</td><td>"+product[i][1] +"</td><td>"+product[i][2] +"</td><td>"+product[i][3] +"</td></tr><tr>";
+        t += "</tr>";
+    }
+    document.getElementById("listOfProduct").innerHTML += t;
+function addProducts()
+{
+    var t1="";
+    var ap ="";
+    var ap1;
+    
+    var company = document.getElementById("Company").value;
+    var model = document.getElementById("Model").value;
+    var memory = document.getElementById("Memory").value;
+    var price = document.getElementById("Price").value;
+    if(company != "" || model != "" || memory != "" || price != "")
+    {
+        if(!isNaN(price) && !isNaN(memory))  
+            {
+            t1 = "<tr><th>Company</th><th>Model</ht><th>Memory</th><th>Price</th></tr>";
+            confirm("Do you really want to add?");
+            for(let i=0;i<2;i++){
+            t1 += "<tr>";
+            t1 += "<td>"+ product[i][0] +"</td><td>"+product[i][1] +"</td><td>"+product[i][2] +"</td><td>"+product[i][3] +"</td></tr><tr>";
+            t1 += "</tr>";
+        }
+        for(let i=2;i<3;i++)
+        {
+            t1 += "<tr>";
+            ap += "<tr><td>"+company+"</td><td>"+model+"</td><td>"+memory+"</td><td>"+price+"</td></tr>";
+            ap1 = [company,model,memory,price];
+            product.splice(2,0,ap1);
+            t1 += ap;
+            t1 += "</tr>";
+        }
+        for(let i=3;i<product.length;i++)
+        {
+            t1 += "<tr>";
+            t1 += "<td>"+ product[i][0] +"</td><td>"+product[i][1] +"</td><td>"+product[i][2] +"</td><td>"+product[i][3] +"</td></tr><tr>";
+            t1 += "</tr>";
+        }
+
+        document.getElementById('listOfProduct').innerHTML = t1;
+     }
+     else
+     {
+        alert("Please enter valid entry!");
+     }
+    }
+   
+}
+
+
+    </script>
+</body>
+</html>

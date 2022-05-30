@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js Array</title>
+    <style>
+        th{
+            width: 20%;
+        }
+        td{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 40%;height: 50%;">
+        <table id="listOfProduct" style="border: 1px solid black;border-collapse: collapse;">
+        </table> 
+    </div><br><br>
+<div>
+    <select name="names" id="mobileSelect">
+        <option value="0">Samsang Galaxy</option>
+        <option value="1">Nokia S780</option>
+        <option value="2">Xaiomi Note</option>
+        <option value="3">Motorola G10</option>
+    </select>
+<select name="rate" id="rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+</select>
+<button onclick="rateMe()">Rate</button>
+</div>
+
+
+<script>
+var t;
+let productObj = [];
+productObj[0]={"Company":"Samsang","Model":"Galaxy","Memory":64,"Price":15000,"Rate":0};
+productObj[1]={"Company":"Nokia","Model":"S780","Memory":128,"Price":22000,"Rate":0};
+productObj[2]={"Company":"Xaiomi","Model":"Note","Memory":32,"Price":12000,"Rate":0};
+productObj[3]={"Company":"Motorola","Model":"G10","Memory":32,"Price":15000,"Rate":0};
+
+t = '<tr><th>Company</th><th>Model</th><th>Memory</th><th>Price</th><th>Rate</th><tr>';
+    productObj.forEach(i =>{
+        t+='<tr><td>'+i.Company+'</td><td>'+i.Model+'</td><td>'+i.Memory+
+            '</td><td>'+i.Price+'</td><td>'+i.Rate+'</td></tr>';
+    });
+document.getElementById('listOfProduct').innerHTML = t
+  function rateMe(){
+    let proTab = document.getElementById("listOfProduct");
+    rating = document.getElementById('rating');
+    selectedOption = document.getElementById("mobileSelect");
+    selectRating= rating.options[rating.selectedIndex].text;
+    var selectedVal = selectedOption.options[selectedOption.selectedIndex].text;
+    for(let i=0;i<productObj.length;i++){
+        let a = productObj[i].Company+ " "+ productObj[i].Model;
+        let p = productObj[i].Rate;
+        if(selectedVal == a ){
+            proTab.rows[i+2].cells[4].innerHTML = selectRating;
+        }
+    }
+  }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+</head>
+<style>
+    td{
+        text-align: center;
+    }
+   
+</style>
+<body>
+<div>
+    <tr>
+        <input type="text" id="flowersInput">
+        <br>
+        <td>Suggessions: </td><td ><span id="sugg"></span></td>
+    </tr>
+</div>
+<script>
+
+           
+$(document).ready(function()
+{
+
+const flowr=["rose","sunflower","hibiscus","tulip","lotus"];
+
+$("#flowersInput").keyup(function(){
+    var tempFlower = [];
+    const len = $("#flowersInput").val().length;
+    if($("#flowersInput").val() != "")
+    {
+        for(let i=0;i<flowr.length;i++)
+        {
+            var myflower = $("#flowersInput").val();
+
+            if(myflower.toLowerCase() == flowr[i].slice(0,len))
+            {
+                tempFlower.push(flowr[i]);
+            }
+        }
+    }
+    $("#sugg").text(tempFlower);
+})
+});
+       </script>
+</body>
+</html>
