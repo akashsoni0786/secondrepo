@@ -8,11 +8,7 @@ array(
     "product5"=>array("id"=>105,'image'=>"soccer.png","productName"=>"Product 105","price"=>80.00),
 );
 
-if(!isset($_SESSION['addTocart'])){
-    $_SESSION['addTocart'] = array();
-    $_SESSION['counter']  = 0 ;
 
-}
 
 
 

@@ -1,8 +1,15 @@
 <?php 
 session_start();
 include 'config.php';
-if(!isset($_SESSION['addTocart'] )){
+
+if(!isset($_SESSION['addTocart'] ))
+{
 	$_SESSION['addTocart'] = array();
+}
+
+if(!isset($_SESSION['addTocartPrint'] ))
+{
+	$_SESSION['addTocartPrint'] = array();
 }
 ?>
 
@@ -29,15 +36,17 @@ if(!isset($_SESSION['addTocart'] )){
 			<div id= <?php echo $j['id']?> class="product">
 			<img src="images/<?php echo $j["image"]?>">
 			<h3 class="title"><a href="#" id="productName"> <?php echo $j['productName'] ?></a></h3>
-			<span id="price">Price: $<?php echo $j["price"] ?></span>
+			<span>Price: $</span>
+			<span id="price"><?php echo $j["price"] ?></span>
 			<a class="add-to-cart" id="addtocart" >Add To Cart</a>
 			</div>
 			<?php } ?> 
 		</div>
 	</div>
 	<div>
-		<table id="addtocartTable" style="height: 50px;border-collapse: collapse;width: 85%;margin-left: 5%;margin-right: 5%;">
-		</table>
+		<table id="addtocartTable" 	style="text-align:center;height: 50px;width: 90%;margin-left: 5%;margin-right: 5%;">	
+	
+	</table>
 	</div>
 	<div id="footer">
 		<nav>
@@ -50,11 +59,16 @@ if(!isset($_SESSION['addTocart'] )){
 			$(".add-to-cart").click(function()
 			{
 				var id=$(this).closest("div")[0].id;
+				var name = $(this).parent().children().eq(1).text();
+				var price = $(this).parent().children().eq(3).text();
 				$.ajax({
 					url:"server.php",
 					type: "POST",
 					data:{
 							ids : id,
+							names : name,
+							prices : price,
+							quantites : 1,
 						},
 					success:function(result){
 						$("#addtocartTable").html(result);
@@ -63,10 +77,9 @@ if(!isset($_SESSION['addTocart'] )){
 			});
 
 	$("#addtocartTable").on("click", "#delete", function(e) {
-        // $(this).closest("tr").remove();
 		e.preventDefault();
 		var id = $(this).closest('tr').children().first().text();
-		$.post('delete.php',{name : id }, function (data){
+		$.post('server.php',{delId : id }, function (data){
 			$("#addtocartTable").html(data);
 		});
 
