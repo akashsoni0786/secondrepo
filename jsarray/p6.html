@@ -83,11 +83,8 @@ document.getElementById('listOfProduct').innerHTML = t
         {
             if(quant < productObj[Object.keys(productObj)[i]].Quantity)
             {
-                alert(Object.keys(addToCartProducts));
-                // alert(addToCartProducts.hasOwnProperty(productObj[Object.keys(productObj)[i]].Company));
                 if(addToCartProducts.hasOwnProperty(productObj[Object.keys(productObj)[i]].Company) == false)
                 {
-                alert(productObj[Object.keys(productObj)[i]].Quantity);
                 productObj[Object.keys(productObj)[i]].Quantity = parseInt(productObj[Object.keys(productObj)[i]].Quantity) - parseInt(quant);
                 addToCartProducts[productObj[Object.keys(productObj)[i]].Company] = {productName : productObj[Object.keys(productObj)[i]].Company, quantity : quant, price : productObj[Object.keys(productObj)[i]].Price};
                 addToCartProducts[productObj[Object.keys(productObj)[i]].Company].price = addToCartProducts[productObj[Object.keys(productObj)[i]].Company].price * quant;               
@@ -108,7 +105,6 @@ document.getElementById('listOfProduct').innerHTML = t
 
             else
             {
-            alert(productObj[Object.keys(productObj)[i]].Quantity);
             productObj[Object.keys(productObj)[i]].Quantity = parseInt(productObj[Object.keys(productObj)[i]].Quantity) - parseInt(quant);
             addToCartProducts[productObj[Object.keys(productObj)[i]].Company].quantity = parseInt(addToCartProducts[productObj[Object.keys(productObj)[i]].Company].quantity) +parseInt(quant);
             addToCartProducts[productObj[Object.keys(productObj)[i]].Company].price =parseInt(productObj[Object.keys(productObj)[i]].Price)*parseInt(addToCartProducts[productObj[Object.keys(productObj)[i]].Company].quantity);
