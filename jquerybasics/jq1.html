@@ -37,8 +37,8 @@ $(document).ready(function(){
 
 $("#conPass").keyup(function()
 {
-    // if($(this).val() != $("#passwrd").val().substr(0,$(this).val().length)){
-        if($(this).val() != $("#passwrd").val()){
+    if($(this).val() != $("#passwrd").val().substr(0,$(this).val().length)){
+        // if($(this).val() != $("#passwrd").val()){
         $("#errorSuggession").text("Password didn't match!");
         $("#errorSuggession").css("color","red");
     }

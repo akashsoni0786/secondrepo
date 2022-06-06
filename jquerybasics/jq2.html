@@ -18,9 +18,9 @@
 <body>
 
 <br><br>
-<tr><td> <button id="evenBtn">Color Even Rows</button>
+<tr><td> <button id="oddBtn">Color Even Rows</button>
 </td>
-<td><button id="oddBtn">Color Odd Rows</button></td></tr>
+<td><button id="evenBtn">Color Odd Rows</button></td></tr>
 <table style="border: 1px;">
 
     <tr><th>Name</th>
@@ -55,10 +55,10 @@ $(document).ready(function(){
 
 
 $("#evenBtn").click(function(){
-    $("tr:odd").css("background-color" , "DodgerBlue" );
+    $("tr:even").css("background-color" , "DodgerBlue" );
 });
 $("#oddBtn").click(function(){
-    $("tr:even").css("background-color" , "LightGrey" );
+    $("tr:odd").css("background-color" , "LightGrey" );
 });
 });
 </script>
