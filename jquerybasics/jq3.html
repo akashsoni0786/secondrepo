@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JQuery</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="jquery.js" defer></script>
     <style>
         th,td{
             width: 200px;
@@ -46,9 +45,12 @@ $("#conPass").keyup(function(){
 $("#submitNames").click(function(){
     if($("#firstName").val() == ""){
         $("#firstName").css("background-color" ,"red" );
+        $("#firstName").focus();
     }
     else if($("#lastName").val() == ""){
         $("#lastName").css("background-color" ,"red" );
+        $("#lastName").focus();
+
     }
     else{
         $("#firstName").css("background-color" ,"white" );
