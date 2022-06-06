@@ -61,23 +61,7 @@
                 var optnValue = $('#selectColor :selected').val();
                 $('#price2').html(optnValue);
             });
-            $(".paraID").click(function(){
-                alert("You are inside the paragraph");
-            });
-            $(".finalCategoryDiv").on('click','button',function(){
-                var new_line = $(this).attr('class');
-                if(new_line == "itemListBtn"){
-                    catUlBody = $(".categoryList");
-                    catVal = "<ul><li><a href='#'>"+ "Item"+"<button class='itemListBtn'>+</button></a></li></ul>";
-                    catUlBody.append(catVal);
-                }
-
-                else if(new_line == "categoryListBtn"){
-                    catUlBody = $(".finalCategoryDiv");
-                    catVal = "<ul><li><a href='#'>"+ "Category"+"<button class='categoryListBtn'>+</button></a></li></ul>";
-                    catUlBody.append(catVal);
-                }
-            });
+            
 
 
         });
