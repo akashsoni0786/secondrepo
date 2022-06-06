@@ -97,6 +97,8 @@
 			</label>
 			<p class="submit">
 				<input onclick="addDetails()" type="button" name="add_product" id="add_product" value="Add Product">
+				<input onclick="updateDetails()" hidden type="button" name="update_product" id="update_product" value="Update">
+
 			</p>
 		</div>
 		<div id="notification">
@@ -225,14 +227,17 @@ $("#add_product").click(function(){
 		b =  '<td>'+ sku +'</td>';
 		c =  '<td>'+ name +'</td>';
 		d=  '<td>$'+ price +'</td>';
-        if(confirm("Do you really want to add product")){
-            e=  '<td>'+ quantity +'</td>'+
+		var n = $("#add_product");
+        if(confirm("Do you really want to add product"))
+		{
+        e = '<td>'+ quantity +'</td>'+
         '<td><a href="#" class="edit">Edit &nbsp</a><a href="#" id="delete">Delete</a></td>'+
         '</tr>';
         t= a+b+c+d+e;
         $('#product_list').append(t);
         ap='<div class="success">Product Added Successfully.<a href="#" id="close">X</a></div>';
         $('#notification').html(ap);
+		$("#add_product").val('Add Product');
         }
         else{
             alert("Be careful!!!!!");
@@ -251,6 +256,7 @@ $("#notification").on("click", "#close", function() {
  });
 
  $("#product_list").on("click", ".edit", function() {
+	$(this).closest("tr").remove();
     var currentRow= $(this).closest("tr"); 
     var col1=currentRow.find("td:eq(0)").text(); 
     var col2=currentRow.find("td:eq(1)").text(); 
@@ -260,7 +266,8 @@ $("#notification").on("click", "#close", function() {
     $("#product_name").val(col2);
     $("#product_price").val(col3);
     $("#product_quantity").val(col4);
-    $("#add_product").val("Update");
+	$("#add_product").hide();
+	$("#update_product").show();
  });
 
 $("#product_sku").on('keyup',function(){
@@ -319,6 +326,120 @@ $("#product_quantity").on('keyup',function(){
 		$("#product_quantity").css("border","1px solid black");
 	}
 });
+
+$("#update_product").click(function(){
+
+var sku = $("#product_sku").val();
+var name = $("#product_name").val();
+var price = $("#product_price").val();
+var quantity = $("#product_quantity").val();
+var a = '<tr>';
+var valid=0;
+var errors=["Errors are :"];
+
+if(sku == '')
+{
+	errors.push('SKU field is empty');
+	$("#product_sku").css("border","5px solid red");
+	$("#errorSku").html("SKU field is empty");
+	valid =1;
+}
+if(isNaN(sku))
+{
+	errors.push("SKU shoud be integer");
+	$("#errorSku").html("SKU shoud be integer");
+	$("#product_sku").css("border","5px solid red");
+	valid =1;
+}
+
+if(name == '')
+{
+	errors.push('Name field is empty');
+	$("#errorName").html("Name field is empty");
+	$("#product_name").css("border","5px solid red");
+	valid =1;
+  }
+
+  if(!isNaN(name))
+{
+	errors.push("Name shoud not be number.");
+	$("#errorName").html("Name shoud not be number.");
+	$("#product_name").css("border","5px solid red");
+	valid =1;
+  }
+
+if(price == ''){
+	errors.push('Price field is empty');
+	$("#errorPrice").html("Price field is empty.");
+	$("#product_price").css("border","5px solid red");
+	valid =1;
+  }
+
+if(isNaN(price)){
+	errors.push("Price shoud be number.");
+	$("#errorPrice").html("Price shoud be number.");
+	$("#product_price").css("border","5px solid red");
+	valid =1;
+  }
+
+if(quantity==''){
+	errors.push("Quantity field is empty.");
+	$("#errorQuan").html("Quantity field is empty.");
+	$("#product_quantity").css("border","5px solid red");
+	valid =1;
+  }
+if(isNaN(quantity)){
+	errors.push("Quantity shoud be integer");
+	$("#errorQuan").html("Quantity shoud be integer");
+	$("#product_quantity").css("border","5px solid red");
+	valid =1;
+  }
+  var e ='';
+  var er = '<div class="error"><span>';
+if(errors.length >1){
+	errors.forEach(element => {
+		er += element+'</span><br>';
+});
+er +='.<a href="#" id="close">X</a></div>';
+$('#notification').html(er);
+}
+if(quantity !='' && valid==0){
+	$("#product_sku").css("border","1px solid green");
+	$("#product_name").css("border","1px solid green");
+	$("#product_price").css("border","1px solid green");
+	$("#product_quantity").css("border","1px solid green");
+	$("#errorQuan").html("");
+	$("#errorName").html("");
+	$("#errorPrice").html("");
+	$("#errorQuan").html("");
+	$("#product_sku").val('');
+	$("#product_name").val('');
+	$("#product_price").val('');
+	$("#product_quantity").val('');
+	b =  '<td>'+ sku +'</td>';
+	c =  '<td>'+ name +'</td>';
+	d=  '<td>$'+ price +'</td>';
+	var n = $("#add_product");
+	if(confirm("Do you really want to update product"))
+	{
+	e = '<td>'+ quantity +'</td>'+
+	'<td><a href="#" class="edit">Edit &nbsp</a><a href="#" id="delete">Delete</a></td>'+
+	'</tr>';
+	t= a+b+c+d+e;
+	$('#product_list').append(t);
+	ap='<div class="success">Product Updated Successfully.<a href="#" id="close">X</a></div>';
+	$('#notification').html(ap);
+	$("#add_product").show();
+	$("#update_product").hide();	}
+	else{
+		alert("Be careful!!!!!");
+	}
+	
+  }
+   
+
+});
+
 });
 
 
