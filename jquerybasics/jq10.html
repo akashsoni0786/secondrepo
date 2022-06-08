@@ -17,7 +17,8 @@
 <body>
 <h1>Product with category</h1>
 <div class="finalCategoryDiv">
-    <button class="categoryListBtn">+</button>
+    <!-- <button class="categoryListBtn">+</button> -->
+    <input id="enterTextValue">
  <ul class="categoryList">
      <li><a href="">category</a><button class="itemListBtn">+</button> </li>
      <!-- <ul class="categoryWiseItems">
@@ -31,17 +32,23 @@ $(document).ready(function()
 {    
 $(".finalCategoryDiv").on('click','button',function(){
   var new_line = $(this).attr('class');
-  if(new_line == "itemListBtn")
+  var caName = $("#enterTextValue").val();
+  if(new_line == "itemListBtn" && caName != '')
   {
-      catUlBody = $(".categoryList");
-      catVal = "<ul><li><a href='#'>"+ "Item"+"<button class='itemListBtn'>+</button></a></li></ul>";
+      catUlBody = $(this).parent();
+      catVal = "<ul><li><a href='#'>"+ caName+"<button class='itemListBtn'>+</button></a></li></ul>";
       catUlBody.append(catVal);
+      $("#enterTextValue").val('')
   }
-  if(new_line == "categoryListBtn")
+  if(new_line == "categoryListBtn" && caName != '')
   {
-      catUlBody = $(".finalCategoryDiv");
-      catVal = "<li><a href=''>category</a><button class='categoryListBtn'>+</button> </li>";
+      catUlBody = $(this).parent();
+      catVal = "<li><a href=''>"+caName+"</a><button class='categoryListBtn'>+</button> </li>";
       catUlBody.append(catVal);
+      $("#enterTextValue").val('')
+  }
+  if(caName == ''){
+      alert("Input field is empty");
   }
  });
 });
