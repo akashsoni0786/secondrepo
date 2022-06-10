@@ -149,7 +149,6 @@ if (!isset($_SESSION['addTocart'])) {
     $(document).ready(function() {
       loadProducts();
       cartItemsCount();
-
       function loadProducts() {
         $.ajax({
           url: 'homepageserver.php',
@@ -201,7 +200,6 @@ if (!isset($_SESSION['addTocart'])) {
 
         });
       }
-      // $('#showAllProductsHome').on('click', '#addToCartButton', function(e) {
       $(document).on('click', '#addToCartButton', function(e) {
 
         e.preventDefault();
@@ -219,7 +217,7 @@ if (!isset($_SESSION['addTocart'])) {
             pro_price: pPrice
           },
           success: function(result) {
-            window.location = 'index.php';
+            cartItemsCount();
           }
         });
       });

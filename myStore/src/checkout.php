@@ -35,10 +35,10 @@ if (isset($_SESSION['id'])) {
 
 
             <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-            
 
 
-           
+
+
           </ul>
 
           <a href="addtocart.php" style="text-decoration: none;color:black">
@@ -98,9 +98,9 @@ if (isset($_SESSION['id'])) {
 
                     <!--firstName-->
                     <div class="md-form ">
-                    <span id="fnameerror" style="color: red;"></span>
+                      <span id="fnameerror" style="color: red;"></span>
                       <input type="text" id="firstName" class="form-control">
-                      
+
                       <label for="firstName" class="">First name</label>
                     </div>
 
@@ -112,7 +112,7 @@ if (isset($_SESSION['id'])) {
 
                     <!--lastName-->
                     <div class="md-form">
-                    <span id="lnameerror" style="color: red;"></span>
+                      <span id="lnameerror" style="color: red;"></span>
                       <input type="text" id="lastName" class="form-control">
                       <label for="lastName" class="">Last name</label>
                     </div>
@@ -133,14 +133,14 @@ if (isset($_SESSION['id'])) {
 
                 <!--email-->
                 <div class="md-form mb-5">
-                <span id="emailerror" style="color: red;"></span>
+                  <span id="emailerror" style="color: red;"></span>
                   <input type="text" id="email" class="form-control" placeholder="youremail@example.com">
                   <label for="email" class="">Email (optional)</label>
                 </div>
 
                 <!--address-->
                 <div class="md-form mb-5">
-                <span id="add1error" style="color: red;"></span>
+                  <span id="add1error" style="color: red;"></span>
 
                   <input type="text" id="address" class="form-control" placeholder="1234 Main St">
                   <label for="address" class="">Address</label>
@@ -148,7 +148,7 @@ if (isset($_SESSION['id'])) {
 
                 <!--address-2-->
                 <div class="md-form mb-5">
-                <span id="add2error" style="color: red;"></span>
+                  <span id="add2error" style="color: red;"></span>
 
                   <input type="text" id="address-2" class="form-control" placeholder="Apartment or suite">
                   <label for="address-2" class="">Address 2 (optional)</label>
@@ -175,7 +175,7 @@ if (isset($_SESSION['id'])) {
                   <!--Grid column-->
                   <div class="col-lg-4 col-md-6 mb-4">
 
-                    
+
                     <span id="cityerror" style="color: red;"></span>
 
                     <input type="text" class="form-control" id="city" placeholder="" required>
@@ -266,13 +266,9 @@ if (isset($_SESSION['id'])) {
                   </div>
                 </div>
                 <hr class="mb-4">
-                <span data-mdb-toggle="modal" data-mdb-target="#exampleModal" hidden
-                 class="btn btn-primary btn-lg btn-block" id="modalCompletepaymentId"
-                type="button"></span>
+                <span data-mdb-toggle="modal" data-mdb-target="#exampleModal" hidden class="btn btn-primary btn-lg btn-block" id="modalCompletepaymentId" type="button"></span>
 
-                <button  
-                id="checkoutButton" class="btn btn-primary btn-lg btn-block" 
-                type="button">Proceed to pay</button>
+                <button id="checkoutButton" class="btn btn-primary btn-lg btn-block" type="button">Proceed to pay</button>
 
               </form>
 
@@ -327,7 +323,7 @@ if (isset($_SESSION['id'])) {
     <!--/.Footer-->
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" data-toggle='modal' data-keyboard="false" data-backdrop="static" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header border-bottom-0">
@@ -341,7 +337,7 @@ if (isset($_SESSION['id'])) {
             <span id="summaryDetails"></span>
           </div>
           <div class="modal-footer d-flex justify-content-center border-top-0 py-4">
-            <a href='index.php' type="button" class="btn btn-primary btn-lg mb-1">
+            <a href='index.php' id="confirmforpayment" type="button" class="btn btn-primary btn-lg mb-1">
               Continue Shopping
             </a>
           </div>
@@ -388,7 +384,7 @@ if (isset($_SESSION['id'])) {
                 var q = parseInt(carts[Object.keys(carts)[i]].quantity);
                 var p = parseInt(carts[Object.keys(carts)[i]].price);
                 var res = q * p;
-                total1 = total + res;
+                total1 = total1 + res;
                 row2 += '<div class="d-flex justify-content-between">' +
                   '<p class="fw-bold mb-0">' + carts[Object.keys(carts)[i]].pname +
                   '(Qty:' + carts[Object.keys(carts)[i]].quantity + ')</p>' +
@@ -495,7 +491,7 @@ if (isset($_SESSION['id'])) {
             $("#ziperror").html('Please enter valid pincode')
 
           }
-          
+
 
           if (errors.length == 0) {
             $.ajax({
@@ -513,37 +509,48 @@ if (isset($_SESSION['id'])) {
                 add2: ad2
               },
               success: function(result) {
-                console.log(result);
-                jQuery('#modalCompletepaymentId').click();
+                if (result == 'done') {
+                  $("#firstName").val('');
+                  $("#lastName").val('');
+                  $("#email").val('');
+                  $("#state").val('');
+                  $("#city").val('');
+                  $("#zip").val('');
+                  $("#address").val('');
+                  $("#address-2").val('');
+                  cartItemsCount();
+                  jQuery('#modalCompletepaymentId').click();
+                }
+
               }
             });
           }
 
         });
-          $("#firstName").keyup(function(){
-            $("#fnameerror").html("");
-          });
-          $("#lastName").keyup(function(){
-            $("#lnameerror").html("");
-          });
-          $("#email").keyup(function(){
-            $("#emailerror").html("");
-          });
-          $("#state").keyup(function(){
-            $("#stateerror").html("");
-          });
-          $("#city").keyup(function(){
-            $("#cityerror").html("");
-          });
-          $("#zip").keyup(function(){
-            $("#ziperror").html("");
-          });
-          $("#address").keyup(function(){
-            $("#add1error").html("");
-          });
-          $("#address-2").keyup(function(){
-            $("#add2error").html("");
-          });
+        $("#firstName").keyup(function() {
+          $("#fnameerror").html("");
+        });
+        $("#lastName").keyup(function() {
+          $("#lnameerror").html("");
+        });
+        $("#email").keyup(function() {
+          $("#emailerror").html("");
+        });
+        $("#state").keyup(function() {
+          $("#stateerror").html("");
+        });
+        $("#city").keyup(function() {
+          $("#cityerror").html("");
+        });
+        $("#zip").keyup(function() {
+          $("#ziperror").html("");
+        });
+        $("#address").keyup(function() {
+          $("#add1error").html("");
+        });
+        $("#address-2").keyup(function() {
+          $("#add2error").html("");
+        });
 
 
       });

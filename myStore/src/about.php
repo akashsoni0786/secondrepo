@@ -194,5 +194,26 @@ if (!isset($_SESSION['addTocart'])) {
       <p class="m-0 text-center text-white">Copyright &copy; www.startshop.com 2022</p>
     </div>
   </footer>
+
+
+  <script>
+    $(document).ready(function(){
+      cartItemsCount();
+      function cartItemsCount() {
+        $.ajax({
+          url: "homepageserver.php",
+          type: "POST",
+          data: {
+            cartLength: 'cart'
+          },
+          success: function(res) {
+            $("#cartCountId").html(res);
+          }
+
+
+        });
+      }
+    });
+  </script>
 </body>
 </html>
