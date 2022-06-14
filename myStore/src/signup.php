@@ -99,11 +99,16 @@
                     </div>
 
                     <div class="form-check d-flex justify-content-center mb-5">
+
                       <input class="form-check-input me-2" type="checkbox" value="" id="termsandconditions" />
+
                       <label class="form-check-label" for="form2Example3">
                         I agree all statements in <a href="#!">Terms of service</a>
                       </label>
+
                     </div>
+                    <p id="checkornot" style="color: red;font-size:0.8rem;margin-top:-20px"></p>
+
 <span type="button" data-mdb-toggle="modal" data-mdb-target="#errorModal" id="invalidcredentials"></span>
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       <button type="button" id="registerButton" name="registerButton" class="btn btn-primary btn-lg">Register</button>
@@ -225,21 +230,14 @@
 
         }
 
-        if (conditions == false) {
+        if (conditions == false) 
+        {
           errors.push('Unchecked');
+          $("#checkornot").html('Require to accept ters and conditions')
+
         }
-        // if(errors.length>0)
-        // {
-        //   var er = '';
-        //     for(let i=0;i<errors.length;i++){
-        //         er += '<p class="mb-0" style="color: #35558a;">'+errors[i]+'</p>';
-        //     }
-
-
-        //   $("#errorsforsignup").html(re);
-
-        // }
-        if (errors.length == 0) {
+        if (errors.length == 0) 
+        {
           $("#firstName").val('');
           $("#lastName").val('');
           $("#email").val('');
@@ -260,14 +258,15 @@
               passwrd: password,
             },
             success: function(result) {
-              if (result == 1) 
+              console.log(result);
+              if (result === "0") 
               {
+                // alert("0")
                 window.location = 'signin.php';
               } 
-              else 
+              else
               {
-                // er = '<p class="mb-0" style="color: #35558a;">' + result + '</p>';
-                // $("#errorsforsignup").html("User already exist");
+                // alert("1")
                 $('#invalidcredentials').click();
 
               }

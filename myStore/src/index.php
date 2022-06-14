@@ -25,7 +25,7 @@ if (!isset($_SESSION['addTocart'])) {
 
 <body>
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; z-index: 99;width:100%">
     <div class="container px-4 px-lg-5">
       <a class="navbar-brand text-primary" style="font-weight: bold;" href="#!">Start Shop</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -58,7 +58,7 @@ if (!isset($_SESSION['addTocart'])) {
               <li><a class="dropdown-item" href="#!">jewellery</a></li>
           </li>
 
-         
+
         </ul>
         </a>
         </ul>
@@ -81,9 +81,7 @@ if (!isset($_SESSION['addTocart'])) {
               Logout
             </a></a>
         <?php
-        } 
-        
-        else {
+        } else {
         ?>
           <a href="logout.php" style="text-decoration: none;color:black">
             <a href="signin.php" class="btn btn-outline-primary ms-2" type="submit">
@@ -96,10 +94,10 @@ if (!isset($_SESSION['addTocart'])) {
         <?php
         if (isset($_SESSION['id'])) {
         ?>
-        <a href="profile.php" class="nav-item" style="list-style: none;"><i class="fas fa-user fa-fw text-primary float-end ms-4"></i></a>
-<?php
+          <a href="profile.php" class="nav-item" style="list-style: none;"><i class="fas fa-user fa-fw text-primary float-end ms-4"></i></a>
+        <?php
         }
-?>
+        ?>
         <!-- </form> -->
       </div>
     </div>
@@ -118,14 +116,14 @@ if (!isset($_SESSION['addTocart'])) {
 
 
   <div class="input-group  d-flex aligns-items-center justify-content-center mt-5">
-  <div class="form-outline">
-    <input type="search"  class="form-control border" id="searchTxt" />
-    <label class="form-label" for="form1" >Search</label>
+    <div class="form-outline">
+      <input type="search" class="form-control border" id="searchTxt" />
+      <label class="form-label" for="form1">Search</label>
+    </div>
+    <button type="button" id="searchBarbtn" class="btn btn-primary">
+      <i class="fas fa-search"></i>
+    </button>
   </div>
-  <button type="button" id="searchBarbtn" class="btn btn-primary">
-    <i class="fas fa-search"></i>
-  </button>
-</div>
 
 
   <section class="py-5">
@@ -149,6 +147,7 @@ if (!isset($_SESSION['addTocart'])) {
     $(document).ready(function() {
       loadProducts();
       cartItemsCount();
+
       function loadProducts() {
         $.ajax({
           url: 'homepageserver.php',
@@ -264,9 +263,9 @@ if (!isset($_SESSION['addTocart'])) {
 
       });
 
-      
 
-       $('#searchBarbtn').click(function() {
+
+      $('#searchBarbtn').click(function() {
         var searchtext = $("#searchTxt").val().toLowerCase();
 
         $.ajax({
@@ -302,6 +301,58 @@ if (!isset($_SESSION['addTocart'])) {
             });
             $('#showAllProductsHome').html(row);
 
+
+
+          }
+        });
+      });
+
+
+
+      $(document).on('keyup', '#searchTxt', function() {
+        var searchtext = $("#searchTxt").val();
+
+        $.ajax({
+          url: 'homepageserver.php',
+          type: "POST",
+          data: {
+            searchNames: "Show"
+          },
+          success: function(result) {
+            var products = JSON.parse(result);
+            var len = $("#searchTxt").val().length;
+            var row = '';
+            if (searchtext != "") {
+              products.forEach(values => {
+                if (searchtext.toLowerCase() == values['product_name'].slice(0, len)) 
+                {
+                  // alert(values['product_name']);
+                  row += '<div class="col mb-5" id="' + values['product_id'] + '">' +
+                  '<div class="card h-100">' +
+                  '<img class="card-img-top" src="' + values['product_image'] + '" alt="..." />' +
+                  '<div class="card-body p-4">' +
+                  '<div class="text-center">' +
+                  '<h5 class="fw-bolder text-primary">' + values['product_name'] + '</h5>' +
+                  '<div class="d-flex justify-content-center small text-warning mb-2">' +
+                  '<div class="bi-star-fill"></div>' +
+                  '<div class="bi-star-fill"></div>' +
+                  '<div class="bi-star-fill"></div>' +
+                  '<div class="bi-star-fill"></div>' +
+                  '<div class="bi-star-fill"></div>' +
+                  '</div><span class="text-primary">$' + values['product_sale_price'] + '</span></div></div>' +
+
+                  '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">' +
+                  '<div class="text-center"><a class="btn btn-outline-primary mt-auto" id="addToCartButton">Add to cart</a></div>' +
+                  '</div></div> </div>';
+
+                }
+              });
+              $("#showAllProductsHome").html(row);
+
+            } 
+            else {
+              loadProducts();
+            }
 
 
           }

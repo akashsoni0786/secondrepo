@@ -10,6 +10,7 @@ if(isset($_POST['firstName']))
     $address = $_POST['address'];
     $pin = $_POST['pin'];
     $password = $_POST['passwrd'];
+   
     try 
     {
       $sql = "INSERT INTO `Users` (`user_id`, `password`, `firstname`, `lastname`, `email`, `address`, `pincode`) 
@@ -18,15 +19,14 @@ if(isset($_POST['firstName']))
 
         //Code to see if Table Exists
         $res = $conn->query($temp)->fetchAll(PDO::FETCH_ASSOC);
-        $_SESSION['id'] = $res[0][0]['user_id'];
         if(count($res) == 0)
         {
           $conn->exec($sql);
-          echo 1;
+          echo "0";
         }
-        else
+        else        
         {
-          echo("User exists");
+          echo  "1";
         }
     } 
     catch(PDOException $e) 
