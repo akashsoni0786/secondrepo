@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Jun 06, 2022 at 01:36 PM
+-- Generation Time: Jun 17, 2022 at 09:54 AM
 -- Server version: 8.0.19
 -- PHP Version: 7.4.1
 
@@ -45,7 +45,35 @@ CREATE TABLE `Orders` (
 --
 
 INSERT INTO `Orders` (`order_id`, `user_id`, `status`, `total_amount`, `shipping_address`, `shipping_pincode`, `order_date`, `delivery_date`, `users_name`) VALUES
-(410, 157, 'delivered', '3000', 'Kanpur', '449900', '2022-06-06 05:31:57', '2022-06-09 05:31:57', 'Shivam');
+(425, 122, 'delivered', '0', 'f f f f', '222222', '2022-06-07 10:24:46', '2022-06-10 10:24:46', NULL),
+(426, 122, 'pending', '0', 'f f f f', '222222', '2022-06-07 10:24:49', '2022-06-10 10:24:49', NULL),
+(427, 122, 'approved', '3667', 'dd dd d dd', '333333', '2022-06-07 10:29:13', '2022-06-10 10:29:13', NULL),
+(428, 122, 'pending', '3667', 'h h h h', '333333', '2022-06-07 10:29:58', '2022-06-10 10:29:58', NULL),
+(429, 122, 'delivered', '2423423', 'd d d d', '222222', '2022-06-07 10:30:49', '2022-06-10 10:30:49', NULL),
+(434, 128, 'delivered', '43742', 'fdsfdsf sdfdsf dsf dsf', '333333', '2022-06-08 12:36:54', '2022-06-11 12:36:54', NULL),
+(435, 111, 'pending', '3322', 'sgdfsghdf zshghdgfshjgs dfsgdfgbdfg hgdfhdfsgh', '333333', '2022-06-10 05:12:13', '2022-06-13 05:12:13', NULL),
+(436, 111, 'pending', '345', 'bvgdfcvgbdf vbgdfvbdfg dfgdfg bvdfzgbdfg', '333333', '2022-06-10 05:15:48', '2022-06-13 05:15:48', NULL),
+(437, 111, 'pending', '345', 'fgdhsgfdhfgs hdhdgfsh gfhgfh gfshgfsh', '333333', '2022-06-10 05:17:54', '2022-06-13 05:17:54', NULL),
+(438, 111, 'pending', '345', 'bcvbcvb xcvbxcvb bcvxbcv cxvbxcv', '333333', '2022-06-10 05:18:49', '2022-06-13 05:18:49', NULL),
+(439, 111, 'pending', '2427301', 'dfgdf sgdfgdf dfgdfg gfdsgdfg', '333333', '2022-06-10 05:19:24', '2022-06-13 05:19:24', NULL),
+(440, 111, 'pending', '345', 'vxcv xcvxcv xcvxcv xcv', '333333', '2022-06-10 05:19:50', '2022-06-13 05:19:50', NULL),
+(443, 111, 'pending', '345', 'gdfg dfsgdfsg gdfg dfsgdf', '333333', '2022-06-10 05:29:25', '2022-06-13 05:29:25', NULL),
+(444, 111, 'pending', '0', 'gdfg dfsgdfsg gdfg dfsgdf', '333333', '2022-06-10 05:29:28', '2022-06-13 05:29:28', NULL),
+(445, 111, 'pending', '0', 'jghj ghjghfj hjghjhg ghfjgjg', '333333', '2022-06-10 05:29:45', '2022-06-13 05:29:45', NULL),
+(446, 111, 'pending', '0', 'dfgdfg dfgdfgdfsg dsfg sdfgdfsg', '333333', '2022-06-10 05:30:41', '2022-06-13 05:30:41', NULL),
+(447, 111, 'approved', '0', 'dfgdfg dfgdfgdfsg dsfg sdfgdfsg', '333333', '2022-06-10 05:30:43', '2022-06-13 05:30:43', NULL),
+(448, 111, 'pending', '0', 'jghjghj ghj ghjghjh ghjghj', '333333', '2022-06-10 05:32:53', '2022-06-13 05:32:53', NULL),
+(449, 111, 'pending', '0', 'jghjghj ghj ghjghjh ghjghj', '333333', '2022-06-10 05:32:56', '2022-06-13 05:32:56', NULL),
+(450, 111, 'pending', '0', 'jghjghj ghj ghjghjh ghjghj', '333333', '2022-06-10 05:33:00', '2022-06-13 05:33:00', NULL),
+(451, 111, 'pending', '3322', 'xcvxcvcx vxcv vcxv xcvxc', '333333', '2022-06-10 05:37:34', '2022-06-13 05:37:34', NULL),
+(452, 111, 'pending', '0', 'xcvxcvcx vxcv vcxv xcvxc', '333333', '2022-06-10 05:38:02', '2022-06-13 05:38:02', NULL),
+(453, 111, 'pending', '0', 'xcvxcvcx vxcv vcxv xcvxc', '333333', '2022-06-10 05:40:34', '2022-06-13 05:40:34', NULL),
+(454, 111, 'pending', '345', 'dfdsf sdfdsf fsdf dsfdsfds', '333333', '2022-06-10 05:42:34', '2022-06-13 05:42:34', NULL),
+(455, 111, 'pending', '3667', 'dsfdsf dsfds dsfdsf fdsf', '333333', '2022-06-10 05:43:26', '2022-06-13 05:43:26', NULL),
+(456, 111, 'pending', '3322', 'cvbcvb cvbcv cvbcv bcvb', '333333', '2022-06-10 05:45:48', '2022-06-13 05:45:48', NULL),
+(457, 129, 'delivered', '2427435', 'kh 4/584 fyghjuk lko up', '898989', '2022-06-10 12:20:23', '2022-06-13 12:20:23', NULL),
+(458, 128, 'pending', '6855', '121212 2121212112 12121 212', '123456', '2022-06-13 04:15:47', '2022-06-16 04:15:47', NULL),
+(459, 128, 'pending', '2343273640', 'dfghj fghj fghj ghj', '222222', '2022-06-16 13:55:00', '2022-06-19 13:55:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -66,7 +94,36 @@ CREATE TABLE `Order_items` (
 --
 
 INSERT INTO `Order_items` (`order_id`, `product_id`, `quantity`, `related_price`, `transaction_id`) VALUES
-(410, 10110, 1, 3000, 4);
+(427, 10105, 1, 3322, 39),
+(427, 10106, 1, 345, 40),
+(428, 10105, 1, 3322, 41),
+(428, 10106, 1, 345, 42),
+(429, 10104, 1, 2423423, 43),
+(434, 10105, 13, 43186, 51),
+(434, 10106, 1, 345, 52),
+(434, 10109, 1, 211, 53),
+(435, 10105, 1, 3322, 54),
+(436, 10106, 1, 345, 55),
+(437, 10106, 1, 345, 56),
+(438, 10106, 1, 345, 57),
+(439, 10105, 1, 3322, 58),
+(439, 10104, 1, 2423423, 59),
+(439, 10106, 1, 345, 60),
+(439, 10109, 1, 211, 61),
+(440, 10106, 1, 345, 62),
+(443, 10106, 1, 345, 63),
+(451, 10105, 1, 3322, 64),
+(454, 10106, 1, 345, 65),
+(455, 10105, 1, 3322, 66),
+(455, 10106, 1, 345, 67),
+(456, 10105, 1, 3322, 68),
+(457, 10104, 1, 2423423, 69),
+(457, 10105, 1, 3322, 70),
+(457, 10106, 2, 690, 71),
+(458, 10105, 2, 6644, 72),
+(458, 10109, 1, 211, 73),
+(459, 10122, 87, 20184, 74),
+(459, 10124, 1, 2343253456, 75);
 
 -- --------------------------------------------------------
 
@@ -93,16 +150,8 @@ INSERT INTO `Products` (`product_id`, `product_name`, `product_image`, `product_
 (10105, 'sdsdss', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'electronics', '3322', '2222', 22),
 (10106, 'asd', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'electronics', '345', '342', 6546),
 (10109, 'asd', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'home appliances', '211', '121', 2),
-(10110, 'asd', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'electronics', '3000', '2929', NULL),
-(10111, 'asd', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'electronics', 'sdf', 'sdf', NULL),
-(10112, 'asd', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'electronics', 'sdf', 'sdf', NULL),
-(10113, 'asd', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'electronics', 'sdf', 'sdf', 45),
-(10114, 'asd', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'electronics', 'sdf', 'sdf', NULL),
-(10115, 'asd', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'electronics', 'sdf', 'sdf', NULL),
-(10116, 'asd', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'electronics', 'sdf', 'sdf', NULL),
-(10117, 'asd', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'electronics', 'sdf', 'sdf', NULL),
 (10121, 'a', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'furniture', '43', '4435', 345),
-(10122, ' vfdsxv', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'fashion', '232', '2323', 2323),
+(10122, 'vfdsxv', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'fashion', '232', '2323', 2323),
 (10124, 'lksdlj c', 'https://images.unsplash.com/photo-1485875437342-9b39470b3d95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80', 'jewellery', '2343253456', '45654675445', 546);
 
 -- --------------------------------------------------------
@@ -126,6 +175,7 @@ CREATE TABLE `Users` (
 --
 
 INSERT INTO `Users` (`user_id`, `password`, `firstname`, `lastname`, `email`, `address`, `pincode`) VALUES
+(111, '111', 'Admin', 'admin', 'admin@live.com', 'Delhi', '110001'),
 (122, 'secret', 'Sachin', 'Mishra', 'sachin@gmail.com', 'Gomti Nagar', '333333'),
 (125, 'secret', 'KAMAL', 'RAI', 'kamal@rai.com', 'Kanpur, UP..', '220099'),
 (127, 'secret', 'Akash', 'Soni', 'akash@gmail.com', 'LDA Colony,Lucknow', '226012'),
@@ -135,8 +185,26 @@ INSERT INTO `Users` (`user_id`, `password`, `firstname`, `lastname`, `email`, `a
 (131, 'secret', 'Arvind', 'Singh', 'arvind@gmail.com', 'RDSO Colony,Lucknow', '226011'),
 (154, '1234', 'Yash', 'Maurya ', 'yash@gmail.com', 'Lucknow', '223322'),
 (155, '1234', 'Gaurav', 'Sir', 'gaurav@gmail.com', 'Lucknow', '110011'),
-(156, '1234', 'qwqw', 'qwqwqws', 'qwqwqwq', 'qwqwq', '444444'),
-(157, '1234', 'Shivam', 'Yadav', 'shivam@gmail.com', 'Kanpur', '449900');
+(160, '1', 'sdefds', 'fdsfdsfdsgf', 'gdfsgsdfgdfs', 'gdfgdfgdfsg', '112233'),
+(162, '1234', 'aas', 'sasa', 'aasasa', 'asaddsfdasgfdasg', '112211'),
+(163, '1234', 'rtyrty', 'rtyrtyrty', 'rtyrtyrtyrty', 'rtyrtyhrtfhrtfbh', '221133'),
+(164, '1234', 'aaaaaa', 'aaaaaaa', 'aaaaaaadddddd', 'adsasasasasasasa', '111111'),
+(165, '1234', 'xcvxcv', 'xcvzxcvxcvxcv', 'xcvzxcvxcvcxczvcxzv', 'xcvxcvxcvxcvxcvxcvxc', '112233'),
+(166, '1234', 'w', 'eee', 'eweewrewrewrew', 'werewrewrewr', '223344'),
+(167, '1234', 'w', '6', '66er7ryhrtyuh', 'rfyh5e6yrtdfyghrt56e7', '888888'),
+(168, '1234', 'admin@live.com	', 'admin@live.com	', 'admin@live.com	', 'admin@live.com	', 'admin@live.com	'),
+(169, 'hhhhhhhh', 'gggg', 'kkkk', 'gfh@haha', '5654766@@@@@', '546464'),
+(170, '123', 'Kamal', 'Kumar', 'kumar@gmail.com', 'Kanpur Uttar Pradesh', '332211'),
+(171, '123', 'Kamal', 'Chandra', 'chandra@gmail.com', 'dsfgfdgfdgdfgdfg', '221133'),
+(172, '123456', 'Krishan', 'Kumar', 'kishan@gmail.com', 'dfgdfhgfhjfjhj', '221133'),
+(173, '111111', 'sdfgsdfhfhjhj', 'sdfghdgfhjgfj', 'sdfgdfhhj@haasdfji.onm', 'sadgfdfsghfdhfaga', '332244'),
+(174, '11111', 'zsxdgvfdsxgv', 'dfgbbgvdfb', 'gfh@haha.inefgff', 'dsfgbdfbgfvngfn', '221122'),
+(175, '111', 'dfgfdg', 'dfgdfg', 'dfgdfgdfgggf@fffff', 'dfhgfhfgergrrfg', '222222'),
+(176, '111111', 'sdfsf', 'sfsfdsdf', 'gfh@haha.ine', 'sfdsfsfsfsf', '111111'),
+(177, '111111', 'sfsfsfsf', 'sfdsdfsf', 'abc@abc.abc', 'dfasdfasfsfsadf', '111111'),
+(178, '111111', 'daadadadad', 'adsadadads', 'mmm@mmm.mmm', 'xZadasdadzxasdads', '111111'),
+(179, '123', 'fdfdf', 'ee', 'gfhh@hhjj.in', 'dfgdfgdfgdfgsd', '121212'),
+(180, '111', 'bnfdhbds', 'ghdfsgdfgdf', 'jjuahugd@jhjhs.ib', 'pokijhuytgfrdes', '123456');
 
 --
 -- Indexes for dumped tables
@@ -177,25 +245,25 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Orders`
 --
 ALTER TABLE `Orders`
-  MODIFY `order_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=411;
+  MODIFY `order_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=460;
 
 --
 -- AUTO_INCREMENT for table `Order_items`
 --
 ALTER TABLE `Order_items`
-  MODIFY `transaction_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `transaction_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `Products`
 --
 ALTER TABLE `Products`
-  MODIFY `product_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10125;
+  MODIFY `product_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10126;
 
 --
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `user_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `user_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
 
 --
 -- Constraints for dumped tables
