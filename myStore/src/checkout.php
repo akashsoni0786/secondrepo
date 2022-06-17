@@ -560,7 +560,7 @@ if (isset($_SESSION['id'])) {
   </html>
 
 <?php
-} else {
-  echo "You are not logged in";
-}
+
+} 
+
 ?>

@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+if(isset($_SESSION['id'])){
+  if($_SESSION['id'] == 111){
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -214,19 +220,6 @@
                 }
             });
         }
-
-        // $("#changeStatus").click(function(){
-        //     var status = $("#changeStatus option:selected").val();
-        //     console.log(status);
-        //     $.ajax({
-        //         url : 'orderserver.php',
-        //         type : "POST",
-        //         data :{changeStatus : status},
-        //         success : function(result){
-        //             console.log(result);
-        //         }
-        //     });
-        // });
     });
       
       
@@ -234,3 +227,14 @@
 </body>
 
 </html>
+
+<?php
+}
+else{
+  echo "You are not admin";
+}
+}
+else{
+  echo "Error 404";
+}
+?>

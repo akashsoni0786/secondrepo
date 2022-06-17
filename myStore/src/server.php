@@ -24,7 +24,7 @@ try
        echo "Users created successfully".'<br>';
     }
     else{
-       echo("Users table exist".'<br>');
+    //    echo("Users table exist".'<br>');
 
     }
     
@@ -49,7 +49,7 @@ try
        echo "Products created successfully".'<br>';
     }
     else{
-       echo("Products table exist".'<br>');
+    //    echo("Products table exist".'<br>');
 
     }
 
@@ -75,11 +75,11 @@ try
     echo "Orders created successfully".'<br>';
     }
     else{
-    echo("Orders table exist".'<br>');
+    // echo("Orders table exist".'<br>');
 
     }
 
-    echo "All Done";
+    // echo "All Done";
 
  
 } 
