@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="signupform">
+        <h3>Signup Form</h3>
+        <table>
+            <tr>
+                <td>User ID</td>
+                <td><input id="userid" type="text"></td>
+            </tr>
+
+            <tr>
+                <td>Enter name</td>
+                <td><input id="username" type="text"></td>
+            </tr>
+
+            <tr>
+                <td>Enter email</td>
+                <td><input id="useremail" type="text"></td>
+            </tr>
+
+            <tr>
+                <td>Enter city</td>
+                <td><input id="usercity" type="text"></td>
+            </tr>
+
+            <tr>
+                <td>Role</td>
+                <td><select id="selectRole">
+                        <option selected disabled value="">Select Role</option>
+                        <option>User</option>
+                        <option>Admin</option>
+                    </select></td>
+            </tr>
+
+            <tr>
+                <td>Password</td>
+                <td><input id="pass" type="password"></td>
+            </tr>
+            <tr>
+                <td>Confirm password</td>
+                <td><input id="conpass" type="password"></td>
+            </tr>
+
+        </table>
+        <br><br>
+        <button id="submitDetails">Submit</button>
+
+    </div>
+    <div hidden id="loginform">
+        <h3>Login Form</h3>
+        <table>
+            <tr>
+                <td>Email</td>
+                <td><input id="enteremail" type="text"></td>
+            </tr>
+
+            <tr>
+                <td>Password</td>
+                <td><input id="enterpass" type="password"></td>
+            </tr>
+        </table>
+        <button id="submitLogin">Login</button>
+    </div>
+
+    <div hidden id="adminblock">
+        <table id="showAllUser"></table>
+
+    </div>
+
+    <script>
+
+        $(document).ready(function () {
+            // var alluser
+            var userarr = [];
+
+            $(document).on('click', '#submitDetails', function () {
+                var uid = $("#userid").val();
+                var uname = $("#username").val();
+                var uemail = $("#useremail").val();
+                var ucity = $("#usercity").val();
+                var urole = $("#selectRole option:selected").text();
+                var upas = $("#pass").val();
+                var uconpass = $("#conpass").val();
+                var err = [];
+                if (uid == '') {
+                    err.push("Uid field is empty");
+
+                }
+                if (uname == '') {
+                    err.push("Name field is empty");
+
+                }
+                if (uemail == '') {
+                    err.push("Email field is empty");
+
+                }
+                if (uemail != '') {
+                    userarr.forEach(i => {
+                        if (i['email'] == uemail) {
+                            err.push('Mail Alerady exist');
+                        }
+                    });
+                }
+                if (ucity == '') {
+                    err.push("City field is empty");
+
+                }
+                if (upas == '') {
+                    err.push("Password field is empty");
+
+                }
+                if (uconpass != upas) {
+                    err.push("Passwords are not matching");
+
+                }
+                if (err.length != 0) {
+                    var k = '';
+                    for (let i = 0; i < err.length; i++) {
+                        k += err[i];
+                    }
+                    alert(k);
+                }
+
+
+                if (err.length == 0) {
+                    userarr[uid] = {
+                        "id": uid, "name": uname,
+                        "email": uemail, "city": ucity,
+                        "role": urole, "password": upas
+                    };
+                    console.log(userarr);
+                    $("#signupform").attr('hidden', true);
+                    $("#loginform").attr('hidden', false);
+                }
+
+            });
+
+            $(document).on('click', "#submitLogin", function () {
+                var email = $("#enteremail").val();
+                var pass = $("#enterpass").val();
+                console.log(email + pass);
+                var err = [];
+                if (email == '') {
+                    err.push("Email field is empty");
+
+                }
+                if (pass == '') {
+                    err.push("Password field is empty");
+
+                }
+                if (err.length == 0) {
+                    userarr.forEach(i => {
+
+                        if (i['email'] == email && i['password'] == pass && i['role'] == "Admin") {
+                            alert("Welcome admin  " + i['name']);
+                            $("#signupform").attr('hidden', true);
+                            $("#loginform").attr('hidden', true);
+                            $("#adminblock").attr('hidden', false);
+                            allUsers();
+                        }
+                        else if (i['email'] == email && i['password'] == pass) {
+                            alert("Welcome" + i['name']);
+                            $("#signupform").attr('hidden', false);
+                            $("#loginform").attr('hidden', true);
+                        }
+                    });
+                }
+
+
+            });
+
+            function allUsers() {
+                var row = '<tr><th>Uid</th><th>Name</th><th>Email</th><th>City</th><th>Action</th></tr>';
+                userarr.forEach(i => {
+                    row += '<tr><td>' + i['id'] + '</td><td>' + i['name'] + '</td><td>' + i['email'] + '</td><td>' + i['city'] + '</td><td id="' + i['id'] + '" class="deleteUser"><a href="#">Delete</a></td></tr>';
+                });
+                $("#showAllUser").html(row);
+
+            }
+
+            $(document).on('click', '.deleteUser', function () {
+                $(this).parent().remove();
+                var uid = $(this).attr('id');
+                userarr[uid] = [];
+            });
+
+
+
+        });
+    </script>
+</body>
+
+</html>
