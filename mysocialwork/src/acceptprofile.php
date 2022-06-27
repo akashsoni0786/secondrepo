@@ -21,23 +21,16 @@ session_start();
             <nav class="navbar">
                 <div class="nav-wrapper">
                     <img src="img/logo.PNG" class="brand-img" alt="">
+                    <input type="text" class="search-box" placeholder="search">
                     <div class="nav-items">
-                        <a href="home.php">
-                            <img src="img/home.PNG" class="icon" alt="">
-                        </a>
-                        <a href="findfriends.php">
-                            <img src="img/messenger.PNG" class="icon" alt="">
-                        </a>
-                        <!-- <a href="findfriends.php">
-
-                        <img src="img/add.PNG" class="icon" alt=""></a> -->
-
-                        <a href="logout.php">
-                            <img src="img/explore.PNG" class="icon" alt="">
-                        </a>                        <!-- <img src="img/like.PNG" class="icon" alt=""> -->
+                        <img src="img/home.PNG" class="icon" alt="">
+                        <img src="img/messenger.PNG" class="icon" alt="">
+                        <img src="img/add.PNG" class="icon" alt="">
+                        <img src="img/explore.PNG" class="icon" alt="">
+                        <img src="img/like.PNG" class="icon" alt="">
                         <a href="profile.php">
-                            <img src="img/user.png" class="icon" alt="">
-
+                            <div class="icon user-profile">
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -49,12 +42,12 @@ session_start();
     <div class="container">
 
         <div class="profile">
-            <div class="profile-image" >
-                <img style="max-width: 400px;" id="userpicid" src="" alt="">
+            <div class="profile-image">
+                <img id="userpicid" style="max-width: 400px;" src="" alt="">
             </div>
             <div class="profile-user-settings">
                 <h1 class="profile-user-name" id="usernameid"></h1>
-                <button class="btn profile-edit-btn" id="muteOrunmute">0</button>
+                <button id="acceptrequestid" class="btn profile-edit-btn">Accept</button>
                 <button class="btn profile-settings-btn" aria-label="profile settings">
                     <i class="fas fa-cog" aria-hidden="true"></i></button>
             </div>
@@ -73,60 +66,53 @@ session_start();
     </header>
 
 
-
     <script>
         $(document).ready(function() {
-            showProfilefriend();
+            showProfileTemp();
 
-            function showProfilefriend() {
+            function showProfileTemp() {
                 $.ajax({
                     url: "homeserver.php",
                     type: "POST",
                     data: {
-                        friend_profile: true
+                        temp_profile: "Show"
                     },
                     success: function(result) {
-                        console.log(JSON.parse(result));
-                        var u = JSON.parse(result);
-                        values = u['user'];
-                        friend = u['friend'];
+                        console.log(result);
 
-                        console.log(values);
+                        var u = JSON.parse(result);
+                        var values = u['user'];
+                        var req = u['req'];
+
+                        var uid = values[0]['user_id'];
                         var uname = values[0]['user_name'];
                         var fullname = values[0]['fullname'];
                         var upic = values[0]['user_pic'];
-                        var muting = friend[0]['muting'];
-
-                        // console.log(muting);
 
                         $("#userpicid").attr('src', upic);
                         $("#usernameid").html(uname);
                         $("#fullnameid").html(fullname);
-                        $("#muteOrunmute").html(muting);
+
                     }
                 });
             }
 
-        
-            $("#muteOrunmute").click(function() {
-                var uname = $(this).prev().text();
-                var mute = $(this).text();
-                alert(uname);
-                $.ajax({
-                    url: 'homeserver.php',
-                    type: "POST",
-                    data: {
-                        usernameforMute: uname,
-                        status: mute
-                    },
-                    success: function(result) {
-                        console.log(result);
-                        showProfilefriend();
-
-                    }
-
+            $(document).on('click', '#acceptrequestid', function() {
+                    var uname = $(this).prev().text();
+                    alert(uname);
+                    $.ajax({
+                        url: "homeserver.php",
+                        type: "POST",
+                        data: {
+                            acceptUname: uname 
+                        },
+                        success: function(result) {
+                            $("#acceptrequestid").html('You are friends now');
+                            $("#acceptrequestid").attr('disabled',true);
+                            alert(result);
+                        }
+                    });
                 });
-            });
         });
     </script>
 </body>

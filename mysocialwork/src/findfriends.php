@@ -1,18 +1,16 @@
 <?php
 session_start();
 include 'connection.php';
-try 
-{
+try {
     $sql = 'SELECT * FROM `Posts` WHERE 1';
     $rows = $conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-} 
-catch (PDOException $e) 
-{
+} catch (PDOException $e) {
     echo $e;
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,6 +19,7 @@ catch (PDOException $e)
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>friends</title>
 </head>
+
 <body>
     <section class="main">
         <div class="wrapper">
@@ -28,13 +27,22 @@ catch (PDOException $e)
                 <div class="nav-wrapper">
                     <img src="img/logo.PNG" class="brand-img" alt="">
                     <div class="nav-items">
-                        <img src="img/home.PNG" class="icon" alt="">
-                        <img src="img/messenger.PNG" class="icon" alt="">
-                        <img src="img/add.PNG" class="icon" alt="">
-                        <img src="img/explore.PNG" class="icon" alt="">
-                        <img src="img/like.PNG" class="icon" alt="">
+                        <a href="home.php">
+                            <img src="img/home.PNG" class="icon" alt="">
+                        </a>
+                        <a href="findfriends.php">
+                            <img src="img/messenger.PNG" class="icon" alt="">
+                        </a>
+                        <!-- <a href="findfriends.php">
+
+                        <img src="img/add.PNG" class="icon" alt=""></a> -->
+
+                        <a href="logout.php">
+                            <img src="img/explore.PNG" class="icon" alt="">
+                        </a> <!-- <img src="img/like.PNG" class="icon" alt=""> -->
                         <a href="profile.php">
-                            <div class="icon user-profile"></div>
+                            <img src="img/user.png" class="icon" alt="">
+
                         </a>
                     </div>
                 </div>
@@ -61,86 +69,86 @@ catch (PDOException $e)
     </section>
 
 
-  
+
     <script>
         $(document).ready(function() {
+            listOfFriends();
+            showAllUsers();
+
             $(document).on('keyup', "#searchbarId", function() {
                 var searchtext = $("#searchbarId").val();
                 $.ajax({
                     url: 'homeserver.php',
                     type: "POST",
-                    data: {
+                    data: 
+                    {
                         searchNames: searchtext
                     },
                     success: function(result) {
                         var searchedpeople = JSON.parse(result);
                         console.log(searchedpeople);
                         const len = $("#searchbarId").val().length;
-                        var row = '<span hidden> <div  class="profile-card"><div class="profile-pic">'+
-                            '<img src="img/cover 9.png" alt=""> </div><div>'+
-                            '<p class="username">modern_web_channel</p>'+
-                            '<p class="sub-text">followed bu user</p>'+
-                        '</div><button class="action-btn">follow</button></div></span>';
-                        if(searchtext != "")
-                        {
+                        var row = '<span hidden> <div  class="profile-card"><div class="profile-pic">' +
+                            '<img src="img/cover 9.png" alt=""> </div><div>' +
+                            '<p class="username">modern_web_channel</p>' +
+                            '<p class="sub-text">followed bu user</p>' +
+                            '</div><button class="action-btn">follow</button></div></span>';
+                        if (searchtext != "") {
                             searchedpeople.forEach(i => {
-                            if (searchtext.toLowerCase() == i['user_name'].slice(0, len)) 
-                            {
-                                row += '<div class="profile-card"><div class="profile-pic">' +
-                                    '<img id="' + i['user_id'] + '"  src="' + i['user_pic'] 
-                                    + '" alt="" class="viewDetailsTemp"></div><div>' +
-                                    '<p>' + i['user_name'] + '</p>' +
-                                    '<p class="sub-text">followed bu user</p></div>' +
-                                    '<button type="button" class="action-btn viewDetails" id="' 
-                                    + i['user_id'] + '">follow</button></div>';
+                                if (searchtext.toLowerCase() == i['user_name'].slice(0, len)) {
+                                    row += '<div class="profile-card"><div class="profile-pic">' +
+                                        '<img id="' + i['user_id'] + '"  src="' + i['user_pic'] +
+                                        '" alt="" class="viewDetailsTemp"></div><div>' +
+                                        '<p>' + i['user_name'] + '</p>' +
+                                        '<p class="sub-text">followed bu user</p></div>' +
+                                        '<button type="button" class="action-btn viewDetails" id="' +
+                                        i['user_id'] + '">follow</button></div>';
 
-                            }
-                            else if (searchtext.toLowerCase() == i['email'].slice(0, len)) 
-                            {
-                                row += '<div class="profile-card"><div class="profile-pic">' +
-                                    '<img id="' + i['user_id'] + '" src="' +
-                                     i['user_pic'] + '" alt="" class="viewDetailsTemp"></div><div>' +
-                                    '<p>' + i['user_name'] + '</p>' +
-                                    '<p class="sub-text">followed bu user</p></div>' +
-                                    '<button type="button" class="action-btn viewDetails" id="' 
-                                    + i['user_id'] + '">follow</button></div>';
-                            }
-                            
+                                } 
+                                
+                                else if (searchtext.toLowerCase() == i['fullname'].slice(0, len))  
+                                {
+                                    row += '<div class="profile-card"><div class="profile-pic">' +
+                                        '<img id="' + i['user_id'] + '" src="' +
+                                        i['user_pic'] + '" alt="" class="viewDetailsTemp"></div><div>' +
+                                        '<p>' + i['user_name'] + '</p>' +
+                                        '<p class="sub-text">followed bu user</p></div>' +
+                                        '<button type="button" class="action-btn viewDetails" id="' +
+                                        i['user_id'] + '">follow</button></div>';
+                                }
 
-                        });
-                        $("#searchresultTable").html(row);
 
-                        }
-                        else{
+                            });
+                            $("#searchresultTable").html(row);
+
+                        } else {
                             showAllUsers();
                         }
                     }
                 });
             });
-            listOfFriends();
-            function listOfFriends()
-            {
+
+            function listOfFriends() {
                 $.ajax({
                     url: 'homeserver.php',
                     type: "POST",
                     data: {
                         showMyfriends: "MyFriends"
                     },
-                    success: function(result) 
-                    {
+                    success: function(result) {
                         var myfriends = JSON.parse(result);
-                        var row = '<span hidden> <div  class="profile-card"><div class="profile-pic">'+
-                            '<img src="img/cover 9.png" alt=""> </div><div>'+
-                            '<p class="username">modern_web_channel</p>'+
-                            '<p class="sub-text">followed bu user</p>'+
-                        '</div><button class="action-btn">follow</button></div></span>';
+                        var row = '<span hidden> <div  class="profile-card"><div class="profile-pic">' +
+                            '<img src="img/cover 9.png" alt=""> </div><div>' +
+                            '<p class="username">modern_web_channel</p>' +
+                            '<p class="sub-text">followed bu user</p>' +
+                            '</div><button class="action-btn">follow</button></div></span>';
                         myfriends.forEach(i => {
                             row += '<div class="profile-card"><div class="profile-pic">' +
-                                    '<img class="viewDetailsfriends" id="' 
-                                    + i['user_id'] + '"  src="' +
-                                     i['user_pic']+ '" alt="" ></div><div>' +
-                                    '<p>' + i['fullname'] + '</p>' +
-                                    '<p class="sub-text">' + i['user_name'] + '</p></div></div>';
+                                '<img class="viewDetailsfriends" id="' +
+                                i['user_id'] + '"  src="' +
+                                i['user_pic'] + '" alt="" ></div><div>' +
+                                '<p>' + i['fullname'] + '</p>' +
+                                '<p class="sub-text">' + i['user_name'] + '</p></div></div>';
                         })
 
                         $("#listOfMyFriends").html(row);
@@ -148,21 +156,21 @@ catch (PDOException $e)
                 });
 
             }
-            $(document).on('click','.viewDetails',function()
-            {
+            $(document).on('click', '.viewDetails', function() {
                 var id = $(this).attr('id');
                 $.ajax({
-                    url : 'homeserver.php',
-                    type : "POST",
-                    data : {viewDetails : id},
-                    success : function(result)
-                    {
-                        console.log(result);
+                    url: 'homeserver.php',
+                    type: "POST",
+                    data: {
+                        viewDetails: id
+                    },
+                    success: function(result) {
+                        alert(result);
                     }
                 });
             });
-            showAllUsers();
-            function showAllUsers(){
+
+            function showAllUsers() {
                 var searchtext = $("#searchbarId").val();
                 $.ajax({
                     url: 'homeserver.php',
@@ -174,64 +182,55 @@ catch (PDOException $e)
                         var allUsers = JSON.parse(result);
                         console.log(allUsers);
                         const len = $("#searchbarId").val().length;
-                        var row = '<span hidden> <div  class="profile-card"><div class="profile-pic">'+
-                            '<img src="img/cover 9.png" alt=""> </div><div>'+
-                            '<p class="username">modern_web_channel</p>'+
-                            '<p class="sub-text">followed bu user</p>'+
-                        '</div><button class="action-btn">follow</button></div></span>';
+                        var row = '<span hidden> <div  class="profile-card"><div class="profile-pic">' +
+                            '<img src="img/cover 9.png" alt=""> </div><div>' +
+                            '<p class="username">modern_web_channel</p>' +
+                            '<p class="sub-text">followed bu user</p>' +
+                            '</div><button class="action-btn">follow</button></div></span>';
                         row += '<div>Top searched..</div><br>';
-                        if(searchtext == ''){
-                        allUsers.forEach(i => 
-                            {
+                        if (searchtext == '') {
+                            allUsers.forEach(i => {
+                                // console.log(i['user_id']);
                                 row += '<div class="profile-card"><div class="profile-pic">' +
-                                    '<img id="' + i['user_id'] + '" src="' + i['user_pic']+ '" alt="" class="viewDetailsTemp"></div><div>' +
+                                    '<a href="#!"><img id="' + i['user_id'] + '" src="' + i['user_pic'] + '" alt="" class="viewDetailsTemp"></a></div><div>' +
                                     '<p>' + i['user_name'] + '</p>' +
                                     '<p class="sub-text">followed bu user</p></div>' +
-                                    '<button type="button" class="action-btn viewDetails" id="' + i['user_id'] + '">follow</button></div>';
+                                    '<a href="#!"><button type="button" class="action-btn viewDetails" id="' + i['user_id'] + '">follow</button></a></div>';
 
                             });
-                        $("#searchresultTable").html(row);
+                            $("#searchresultTable").html(row);
                         }
 
                     }
                 });
             }
-        $(document).on('click','.viewDetailsTemp',function()
-        {
-            var id = $(this).attr('id');
-            // alert(id);
-            $.ajax({
+            $(document).on('click', '.viewDetailsTemp', function() {
+                var id = $(this).attr('id');
+                $.ajax({
                     url: 'homeserver.php',
                     type: "POST",
                     data: {
                         showProfile: id
                     },
                     success: function(result) {
-                        // console.log(result);
-                        // alert(result);
                         window.location = "tempprofile.php";
-                    } 
+                    }
                 });
-        });
+            });
 
-        $(document).on('click','.viewDetailsfriends',function()
-        {
-            var id = $(this).attr('id');
-            // alert(id);
-            $.ajax({
+            $(document).on('click', '.viewDetailsfriends', function() {
+                var id = $(this).attr('id');
+                $.ajax({
                     url: 'homeserver.php',
                     type: "POST",
                     data: {
                         showProfile: id
                     },
-                    success: function(result) 
-                    {
-                        // console.log(result);
-                        // alert(result);
+                    success: function(result) {
                         window.location = "friendprofile.php";
-                    } 
+                    }
                 });
-        });
+            });
         });
     </script>
 </body>

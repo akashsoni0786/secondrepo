@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'connection.php';
 if(isset($_POST['formdata']))
 {
@@ -9,15 +10,21 @@ if(isset($_POST['formdata']))
     $mobnumber = $arr['mobilenumber'];
     $city = $arr['city'];
     $pincode = $arr['pincode'];
-    $pwd = $arr['pwd'];
-    $conpwd = $arr['conpwd'];
-    var_dump($arr);
+    $pwd = $arr['passwords'];
+    $conpwd = $arr['confirmpassword'];
+    // var_dump($arr);
 
     try
     {
-        $sql = "INSERT INTO `Users` (`user_name`, `fullname`, `email`, `mobile`, `city`, `pin`, `password`) 
-        VALUES ('$username', '$name', '$email', '$mobnumber', '$city', '$pincode', '$pwd');";
+        $sql = "INSERT INTO `Users` (`user_name`, `fullname`, `email`, `mobile`, `city`, `pin`, `password`,`user_pic`) 
+        VALUES ('$username', '$name', '$email', '$mobnumber', '$city', '$pincode', '$pwd','img/user.png');";
         $conn->exec($sql);
+
+        $id = $conn->lastInsertId();
+        $selffrnd ="INSERT INTO `Friends` (`user_id`, `friend_id`, `muting`) 
+        VALUES ('$id', '$id', 'Unmute')";
+        $conn->exec($selffrnd);
+
         echo "Successfully Inserted";
     }
     catch(PDOException $e){
@@ -30,28 +37,27 @@ if(isset($_POST['signindata']))
     parse_str(json_decode($_POST['signindata']),$arr);
     $username = $arr['usernamesignin'];
     $pwd = $arr['passwordsignin'];
-    var_dump($arr);
 
     try
     {
         $sql = "SELECT `user_id` FROM `Users` 
                 WHERE `user_name`='$username' AND `password`='$pwd'";
-        // $conn->query($sql);
         $row = $conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-        if(count($row) == 1){
+        
 
-            echo true;
+        if(count($row) == 1)
+        {
+            $_SESSION['uid'] = $row[0]['user_id'];
+            echo "Done";
         }
         else
         {
-            echo false;
+            echo "Not exist";
         }
-        // echo "Successfully Inserted";
     }
     catch(PDOException $e){
         echo "Error : ".$e;
     }
 }
-// echo "Done";
 ?>
